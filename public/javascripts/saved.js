@@ -12,7 +12,7 @@ deleteBTN.forEach(function(element, index) {
     element.parentNode.parentNode.removeChild(element.parentNode);
     
     // AXIOS DELETE ROUTE
-    axios.delete('http://localhost:3000/'+id);
+    axios.delete('http://immense-temple-47734.herokuapp.com/'+id);
     });
 });
 
@@ -35,7 +35,7 @@ reviewBTN.forEach(function(element, index) {
             console.log(grabReview);
 
             // AXIOS PATCH ROUTE
-            axios.patch('http://localhost:3000/reviews/'+id, {
+            axios.patch('http://immense-temple-47734.herokuapp.com/reviews/'+id, {
                 review: grabReview,
                 id: id
             });
