@@ -42,7 +42,7 @@ function saveChurch(req, res, next){
     console.log(req.user);
     console.log(req.user.id);
 
-    db.none('UPDATE churches SET saved = $1 WHERE id = $2', parseInt(req.user.id), churchID)
+    db.none('UPDATE churches SET saved = true WHERE id = $1', churchID)
         .catch(function(err) {
             return next(err);
         });
