@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('partials/header') %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="container">
+          <h1>Welcome, Gainor.</h1><h4>Churches saved to your profile. <small><a href="/">find more?</a></small></h4>
+      <div id="error_msg"><span id="error_msg_span"></span></div>
+      <div id="button_div">
+      </div>
+          <div id="places">
+            <ul id="displaySaved">
+                <% data.forEach(function(d) { %>
+                    <li id="<%= d.id %>"><%= d.name %> <small>located at</small> <%= d.address %><span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span><br><small class="review_text"><%= d.review %></small></li>
+                <% }) %>
+            </ul>
+          </div>
+      </div>
+    </div>
+    <script src="/javascripts/saved.js"></script>
+  </body>
+</html>

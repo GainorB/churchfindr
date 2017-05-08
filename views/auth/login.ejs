@@ -1,0 +1,8 @@
+<%- include('../partials/header') %>
+<h2>ACCOUNT LOGIN</h2>
+<form action="/auth/login" method="post">
+    <input type="text" id="login_username" name="username" placeholder="Username" required><br>
+    <input type="password" id="login_password" name="password" placeholder="Password" required><br>
+    <input type="submit" value="LOGIN" id="login_submit"> <input type="reset" value="RESET" id="login_reset">
+</form>
+<%- include('../partials/footer') %>
