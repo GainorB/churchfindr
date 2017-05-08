@@ -176,26 +176,28 @@ ERRORS ON REGISTER/LOGIN FORMS
 */
 
 #wrapper {
-  display: absolute;
   margin: 0 auto;
+  width: 1200px;
 }
 
 #container {
-  position: absolute;
-  margin: 0 auto;
+  text-align: center;
 }
 
 #places {
   padding: 20px;
-  position: absolute;
-  align-items: center;
-  width: 970px; height: 400px;
+  width: 1000px; height: 400px;
+  margin: 0 auto;
+}
+
+#places ul li {
+  margin-left: -30px;
 }
 
 #container input[type=text] {
-  width: 550px;
-  height: 50px;
-  font-size: 30px;
+  width: 700px;
+  height: 70px;
+  font-size: 40px;
   padding: 10px 10px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -237,6 +239,7 @@ ERRORS ON REGISTER/LOGIN FORMS
   width: 100%;
   border: 1px solid blue;
   background-color: #8379ff;
+  text-align: left;
 }
 
 .displayAddresses:hover {
@@ -297,6 +300,7 @@ small {
   width: 100%;
   border: 1px solid #e7e700;
   background-color: #fffb97;
+  text-align: left;
 }
 
 a:link,
@@ -317,4 +321,8 @@ a:active {
 
 .review_text {
     color: green;
+}
+
+#mainh2 {
+  text-align: center;
 }
