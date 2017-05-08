@@ -2,7 +2,6 @@ require('dotenv').config();
 var cors = require('cors');
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // EXPRESS VALIDATOR MIDDLEWARE
-// https://github.com/ctavan/express-validator#middleware-options
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
