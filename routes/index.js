@@ -28,4 +28,9 @@ router.get('/saved', db.getSavedChurches);
 // PATCH
 router.patch('/reviews/:id', db.reviewChurch);
 
+/*
+* SAVE TO PROFILE
+*/
+router.patch('/savetoprofile/:id', db.saveChurchToProfile);
+
 module.exports = router;

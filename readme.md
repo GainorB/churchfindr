@@ -1,28 +1,30 @@
-# ChurchFindr
+# CHURCHFINDR
 An application that finds local churches or churches using a zip code, with YELP reviews to help the user to find a comfortable fit. Possibly use Google Reviews if it is tied into the Maps API.
 
-### Wireframing
+LIVE! https://immense-temple-47734.herokuapp.com/
 
-https://trello.com/
+### WIREFRAMING
 
-### User Stories
+https://trello.com/b/eZZITrSf/churchfindr
+
+### USER STORIES
 1. A user vists the application
 2. A user reads the description of the application
 3. A user can then browse different aspects of the website to find out more on functionality
 4. An unregistered user is prompted to Register
 5. Once user is registered you can locate churches around your location
 
-### API's
+### API
 * Google Places API
 
-### Landing Page
+### LANDING PAGE
 1. The user will see a brief description of the app and its functions
 2. From there the user can register
     * Mandatory: first name, last name, Email, Password, etc..
 3. Login
 4. Logout
 
-### API Usage
+### API USAGE
 * Utilize Google Places API to locate churches around the user
 
 ### MVP
@@ -33,23 +35,35 @@ https://trello.com/
     * ~~Retrieving information as well~~
 5. ~~Using Google Places API to locate churches~~
 
-### Wish List
+### WISH LIST (BACK LOG)
 1. Incorporating Google Reviews
 2. Leave reviews in the app
 3. Save visited churches to profile
 4. Text a user the address of the church they chose
 
-### Technologies used
+### TECHNOLOGIES USED
 1. HTML/CSS/Javascript
 2. Node.js
 3. Express
 4. PostgreSQL Databases
+5. Postman for Google Places Endpoint testing
 
-### Database
+### DATABASE SCHEMA
+1. psql -f models/schema.sql
+2. https://gist.github.com/GainorB/5b430fda91e2e246e67dbe05b7f6a272
 
-https://gist.github.com/GainorB/5b430fda91e2e246e67dbe05b7f6a272
+### C.R.U.D FUNCTIONALITY
+1. CREATE: https://immense-temple-47734.herokuapp.com/
+    * POST request to '/'
+2. READ: https://immense-temple-47734.herokuapp.com/
+    * GET request to '/'
+3. UPDATE: https://immense-temple-47734.herokuapp.com/
+    * SAVE: /saved/id
+    * REVIEWS: /reviews/id
+4. DELETE: https://immense-temple-47734.herokuapp.com/id
+    * DELETE request to /id
 
-### Node Modules
+### NODE MODULES
 1. Passport: http://passportjs.org/
     * To build a User System with authentication
     * Registration Form to store User's preferences
@@ -78,14 +92,13 @@ https://gist.github.com/GainorB/5b430fda91e2e246e67dbe05b7f6a272
 13. Request
     * Make HTTP calls (Used to GET Google API)
 
-### Download Project & Install
+### DOWNLOAD PROJECT & INSTALL
 1. Git clone or download this project
-2. Open up Terminal or command line
-3. Navigate to the directory where the project was cloned to or downloaded to
+2. Open up Terminal or Command line
+3. Navigate to the directory where the project was cloned or downloaded to
 4. Run this command: psql -f models/schema.sql
 5. This command will create a PostgreSQL database along with the tables
-6. If you haven't already, install nodemon with this command: npm install -g nodemon
-7. To run the application, you need to install the dependencies, run this command: npm install --save
-8. To start the application, run this command: npm run dev
-9. The application will run at: localhost:3000, if that port is already in use, run this command: PORT=1738 npm run dev
-10. This command will start the server at: localhost:1738
+6. To run the application, you need to install the dependencies, run this command: npm install --save
+7. To start the application, run this command: npm start
+8. The application will run at: localhost:3000, if that port is already in use, run this command: PORT=1738 npm start
+9. This command will start the server at: localhost:1738

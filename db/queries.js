@@ -69,6 +69,29 @@ function reviewChurch(req, res, next){
         });
 }
 
+// SAVE CHURCH TO PROFILE
+function saveChurchToProfile(req, res, next){
+    var churchID = parseInt(req.params.id);
+    console.log(req.user);
+    console.log(req.user.id);
+
+    db.none('UPDATE churches SET savedtoprofile = $1 WHERE id = $2', [req.user.id, churchID])
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
+//GET CHURCHES SAVED TO PROFILE
+function getSavedChurchesFromProfile(req, res, next){
+    db.any('SELECT * FROM churches WHERE savedtoprofile = $1', req.user.id)
+        .then(function(data){
+            res.render('users', { title: "Churches Saved To Profile", data: data })
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+}
+
 // EXPORT MODULES TO BE USED IN ROUTING
 module.exports = {
     newChurch: newChurch,
@@ -77,4 +100,6 @@ module.exports = {
     saveChurch: saveChurch,
     getSavedChurches: getSavedChurches,
     reviewChurch: reviewChurch,
+    saveChurchToProfile: saveChurchToProfile,
+    getSavedChurchesFromProfile: getSavedChurchesFromProfile
 };
