@@ -5,7 +5,12 @@ LIVE! https://immense-temple-47734.herokuapp.com/
 
 ### WIREFRAMING
 
-https://trello.com/b/eZZITrSf/churchfindr
+https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
+
+**KEY:**
+Green Labels: Completed
+Yellow Labels: Ongoing
+Red Labels: Important
 
 ### USER STORIES
 1. A user vists the application
