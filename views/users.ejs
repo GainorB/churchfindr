@@ -1,4 +1,5 @@
 <%- include('partials/header') %>
+<div id="divUsers">
 <h1>Welcome to your profile <%= userInfo.username %>!</h1>
 <input type="text" id="register_firstname" name="firstname" placeholder="<%= userInfo.firstname %>" readonly><br>
 <input type="text" id="register_lastname" name="lastname" placeholder="<%= userInfo.lastname %>" readonly><br>
@@ -8,4 +9,5 @@
 <input type="text" id="register_state" name="state" placeholder="<%= userInfo.state %>" readonly><br>
 <input type="text" id="register_zip" name="zipcode" placeholder="<%= userInfo.zip %>" readonly><br>
 <input type="text" id="register_country" name="country" placeholder="<%= userInfo.country %>" readonly><br>
+</div>
 <%- include('partials/footer') %>

@@ -1,5 +1,6 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
+  font-family: 'Open Sans', sans-serif;
 }
 
 #banner {
@@ -315,5 +316,14 @@ a:active {
 }
 
 #mainh2 {
+  text-align: center;
+}
+
+#divUsers,
+#divErrors {
+  text-align: center;
+}
+
+#registrationH1 {
   text-align: center;
 }

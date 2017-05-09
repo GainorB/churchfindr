@@ -8,9 +8,9 @@ LIVE! https://immense-temple-47734.herokuapp.com/
 https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 
 **KEY:**
-Green Labels: Completed
-Yellow Labels: Ongoing
-Red Labels: Important
+    * Green Labels: Completed
+    * Yellow Labels: Ongoing
+    * Red Labels: Important
 
 ### USER STORIES
 1. A user vists the application
@@ -65,11 +65,11 @@ Red Labels: Important
 3. UPDATE: https://immense-temple-47734.herokuapp.com/
     * SAVE: /saved/id
     * REVIEWS: /reviews/id
-4. DELETE: https://immense-temple-47734.herokuapp.com/id
+4. DELETE: https://immense-temple-47734.herokuapp.com/
     * DELETE request to /id
 
 ### NODE MODULES
-1. Passport: http://passportjs.org/
+1. Passport
     * To build a User System with authentication
     * Registration Form to store User's preferences
 2. Axios (CRUD)
