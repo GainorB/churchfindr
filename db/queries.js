@@ -69,6 +69,10 @@ function reviewChurch(req, res, next){
         });
 }
 
+/*
+* SAVE TO PROFILE
+*/
+
 // SAVE CHURCH TO PROFILE
 function saveChurchToProfile(req, res, next){
     var churchID = parseInt(req.params.id);
@@ -101,5 +105,5 @@ module.exports = {
     getSavedChurches: getSavedChurches,
     reviewChurch: reviewChurch,
     saveChurchToProfile: saveChurchToProfile,
-    getSavedChurchesFromProfile: getSavedChurchesFromProfile
+    getSavedChurchesFromProfile: getSavedChurchesFromProfile,
 };

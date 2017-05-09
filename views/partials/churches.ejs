@@ -1,7 +1,7 @@
 <ul>
 <% data.forEach(function(d) { %>
     <% if(d.saved === true) { %>
-    <li class="thisChurchIsSaved"><%= d.name %> <small>located at</small> <%= d.address %> <span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span></li>
+    <li class="thisChurchIsSaved"><%= d.name %> <small>located at</small> <%= d.address %> <span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span><br><small class="review_text"><%= d.review %></small></li>
     <% } else { %>
     <li class="displayAddresses"><%= d.name %> <small>located at</small> <%= d.address %><span class="save" id="<%= d.id %>">SAVE</span><span class="delete" id="<%= d.id %>">DELETE</span></li>
     <% } %>
