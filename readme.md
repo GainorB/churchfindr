@@ -45,6 +45,7 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 2. ~~Leave reviews in the app~~
 3. ~~Save visited churches to profile~~
 4. Text a user the address of the church they chose
+5. ~~Give each user unique searches, pretty much two users don't see what the other searched~~
 
 ### TECHNOLOGIES USED
 1. HTML/CSS/Javascript
@@ -59,16 +60,11 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 3. ![ERD Diagram](./readme-assets/erdplus-diagram.png)
 
 ### C.R.U.D FUNCTIONALITY
-1. CREATE: https://immense-temple-47734.herokuapp.com/
-    * POST request to '/'
-2. READ: https://immense-temple-47734.herokuapp.com/
-    * GET request to '/'
-3. UPDATE: https://immense-temple-47734.herokuapp.com/
-    * SAVE: /saved/id
-    * REVIEWS: /reviews/id
-        * Refresh browser to see the SAVE/REVIEW
-4. DELETE: https://immense-temple-47734.herokuapp.com/
-    * DELETE request to /id
+1. Need to create an account to be able to CRUD.
+    * Create: Searching for a church will create 9-10 rows in the database.
+    * Read: A search will return 9-10 churches from the database.
+    * Update: With a profile, you can SAVE a church to your Profile, then leave a Review. Both actions alter the database.
+    * Delete: You can delete a record from your profile/database.
 
 ### NODE MODULES
 1. Passport
