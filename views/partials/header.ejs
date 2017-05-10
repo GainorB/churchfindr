@@ -3,7 +3,6 @@
   <head>
     <title>ChurchFindr</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
   </head>
@@ -12,11 +11,11 @@
     <ul id="nav">
         <% if(user) { %>
       <li><a href="/">FIND A CHURCH</a></li>
-      <li><a href="/users">PROFILE</a></li>
+      <li><a href="/users">MY PROFILE</a></li>
       <li><a href="/auth/logout">LOG OUT</a></li>
         <% } else { %>
-      <li><a href="/">GET STARTED</a></li>
-      <li><a href="/auth/register">REGISTER</a></li>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/auth/register">REGISTER AN ACCOUNT</a></li>
       <li><a href="/auth/login">LOG IN</a></li>
         <% } %>
     </ul>

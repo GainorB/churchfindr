@@ -1,5 +1,5 @@
 var db = require('../db/config');
-const church = require('../church/church')
+const church = require('../church/church');
 
 // ADD PLACES TO DATABASE
 function newChurch(req, res, next){
@@ -8,7 +8,8 @@ function newChurch(req, res, next){
             console.log(err);
         } else {
             console.log(results);
-            return db.task(t=>t.batch(results.map(r=>t.none('INSERT INTO churches(name, address)' + 'values($1, $2)', [r.name, r.address]))))
+            console.log("User ID "+ parseInt(req.user.id));
+            return db.task(t=>t.batch(results.map(r=>t.none('INSERT INTO churches(name, address, searchprofile)' + 'values($1, $2, $3)', [r.name, r.address, parseInt(req.user.id)]))))
                      .then(function(data){ res.redirect('/'); })
                      .catch(function(err){ return next(err); });
         };
@@ -17,13 +18,26 @@ function newChurch(req, res, next){
 
 // GET ALL CHURCHES
 function getChurches(req, res, next){
-    db.any('SELECT * FROM churches')
+
+    if(typeof (req.user) !== "undefined"){
+        var userID = parseInt(req.user.id);
+        
+        db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
         .then(function(data){
-            res.render('index', { title: "Churches", data: data })
+            res.render('index', { data: data })
         })
         .catch(function(err) {
             return next(err);
         });
+    } else {
+        db.any('SELECT * FROM churches')
+        .then(function(data){
+            res.render('index', { data: data })
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+    }
 }
 
 // DELETE A CHURCH
@@ -31,29 +45,6 @@ function deleteChurch(req, res, next){
     var churchID = parseInt(req.params.id);
 
     db.result('DELETE FROM churches where id = $1', churchID)
-        .catch(function(err) {
-            return next(err);
-        });
-}
-
-// SAVE A CHURCH
-function saveChurch(req, res, next){
-    var churchID = parseInt(req.params.id);
-    console.log(req.user);
-    console.log(req.user.id);
-
-    db.none('UPDATE churches SET saved = true WHERE id = $1', churchID)
-        .catch(function(err) {
-            return next(err);
-        });
-}
-
-// GET SAVED CHURCHES
-function getSavedChurches(req, res, next){
-    db.any('SELECT * FROM churches WHERE saved = true')
-        .then(function(data){
-            res.render('saved', { title: "Saved Churches", data: data })
-        })
         .catch(function(err) {
             return next(err);
         });
@@ -76,10 +67,12 @@ function reviewChurch(req, res, next){
 // SAVE CHURCH TO PROFILE
 function saveChurchToProfile(req, res, next){
     var churchID = parseInt(req.params.id);
-    console.log(req.user);
-    console.log(req.user.id);
+    var userID = parseInt(req.user.id);
 
-    db.none('UPDATE churches SET savedtoprofile = $1 WHERE id = $2', [req.user.id, churchID])
+    console.log("Who's logged in? " + req.user.username);
+    console.log("Get logged in ID number: " + userID);
+
+    db.none('UPDATE churches SET profile = $1 WHERE id = $2', [userID, churchID])
         .catch(function(err) {
             return next(err);
         });
@@ -87,9 +80,11 @@ function saveChurchToProfile(req, res, next){
 
 //GET CHURCHES SAVED TO PROFILE
 function getSavedChurchesFromProfile(req, res, next){
-    db.any('SELECT * FROM churches WHERE savedtoprofile = $1', req.user.id)
+    var userID = parseInt(req.user.id);
+
+        db.any('SELECT churches.id, churches.name, churches.address, churches.review FROM churches JOIN users ON churches.profile = users.id WHERE users.id = $1', userID)
         .then(function(data){
-            res.render('users', { title: "Churches Saved To Profile", data: data })
+            res.render('users', { data: data })
         })
         .catch(function(err) {
             return next(err);
@@ -101,8 +96,6 @@ module.exports = {
     newChurch: newChurch,
     getChurches: getChurches,
     deleteChurch: deleteChurch,
-    saveChurch: saveChurch,
-    getSavedChurches: getSavedChurches,
     reviewChurch: reviewChurch,
     saveChurchToProfile: saveChurchToProfile,
     getSavedChurchesFromProfile: getSavedChurchesFromProfile,

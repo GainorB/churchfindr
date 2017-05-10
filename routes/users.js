@@ -1,12 +1,12 @@
 const express = require('express');
-const userRoutes = express.Router();
+const router = express.Router();
 const authHelpers = require('../services/auth/auth-helpers');
+var db = require('../db/queries');
 
-/* GET users listing. */
+/* GET USERS */
 
-userRoutes.get('/', authHelpers.loginRequired, (req, res) => {
-  //res.json({ user: 'user profile page placeholder', userInfo: req.user });
+router.get('/', authHelpers.loginRequired, db.getSavedChurchesFromProfile, (req, res) => {
   res.render('users', {userInfo:req.user});
 });
 
-module.exports = userRoutes;
+module.exports = router;

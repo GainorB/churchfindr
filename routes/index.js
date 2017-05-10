@@ -12,16 +12,6 @@ router.post('/', db.newChurch);
 router.delete('/:id', db.deleteChurch);
 
 /*
-* SAVING CHURCHES
-*/
-
-// PATCH
-router.patch('/saved/:id', db.saveChurch);
-
-// GET
-router.get('/saved', db.getSavedChurches);
-
-/*
 * REVIEW CHURCHES
 */
 

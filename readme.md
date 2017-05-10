@@ -8,9 +8,9 @@ LIVE! https://immense-temple-47734.herokuapp.com/
 https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 
 **KEY:**
-    * Green Labels: Completed
-    * Yellow Labels: Ongoing
-    * Red Labels: Important
+* Green Labels: Completed
+* Yellow Labels: Ongoing
+* Red Labels: Important
 
 ### USER STORIES
 1. A user vists the application
@@ -42,8 +42,8 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 
 ### WISH LIST (BACK LOG)
 1. Incorporating Google Reviews
-2. Leave reviews in the app
-3. Save visited churches to profile
+2. ~~Leave reviews in the app~~
+3. ~~Save visited churches to profile~~
 4. Text a user the address of the church they chose
 
 ### TECHNOLOGIES USED
@@ -56,6 +56,7 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 ### DATABASE SCHEMA
 1. psql -f models/schema.sql
 2. https://gist.github.com/GainorB/5b430fda91e2e246e67dbe05b7f6a272
+3. ![ERD Diagram](./readme-assets/erdplus-diagram.png)
 
 ### C.R.U.D FUNCTIONALITY
 1. CREATE: https://immense-temple-47734.herokuapp.com/
@@ -65,6 +66,7 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 3. UPDATE: https://immense-temple-47734.herokuapp.com/
     * SAVE: /saved/id
     * REVIEWS: /reviews/id
+        * Refresh browser to see the SAVE/REVIEW
 4. DELETE: https://immense-temple-47734.herokuapp.com/
     * DELETE request to /id
 

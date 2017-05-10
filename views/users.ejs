@@ -1,13 +1,25 @@
 <%- include('partials/header') %>
 <div id="divUsers">
-<h1>Welcome to your profile <%= userInfo.username %>!</h1>
-<input type="text" id="register_firstname" name="firstname" placeholder="<%= userInfo.firstname %>" readonly><br>
-<input type="text" id="register_lastname" name="lastname" placeholder="<%= userInfo.lastname %>" readonly><br>
-<input type="email" id="register_email" name="email" placeholder="<%= userInfo.email %>" readonly><br>
-<input type="text" id="register_street" name="street" placeholder="<%= userInfo.street %>" readonly><br>
-<input type="text" id="register_city" name="city" placeholder="<%= userInfo.city %>" readonly><br>
-<input type="text" id="register_state" name="state" placeholder="<%= userInfo.state %>" readonly><br>
-<input type="text" id="register_zip" name="zipcode" placeholder="<%= userInfo.zip %>" readonly><br>
-<input type="text" id="register_country" name="country" placeholder="<%= userInfo.country %>" readonly><br>
+<h1>Welcome to your profile <%= user.username %>!</h1>
+<p>Below you will find a summary of your account information along with churches you saved to your profile.</p>
+<input type="text" id="register_firstname" name="firstname" placeholder="<%= user.firstname %>" readonly><br>
+<input type="text" id="register_lastname" name="lastname" placeholder="<%= user.lastname %>" readonly><br>
+<input type="email" id="register_email" name="email" placeholder="<%= user.email %>" readonly><br>
+<input type="text" id="register_street" name="street" placeholder="<%= user.street %>" readonly><br>
+<input type="text" id="register_city" name="city" placeholder="<%= user.city %>" readonly><br>
+<input type="text" id="register_state" name="state" placeholder="<%= user.state %>" readonly><br>
+<input type="text" id="register_zip" name="zipcode" placeholder="<%= user.zip %>" readonly><br>
+<input type="text" id="register_country" name="country" placeholder="<%= user.country %>" readonly><br>
+<p>Save a church to your profile, to leave a review!</p>
 </div>
+<div id="places">
+<ul>
+    <% data.forEach(function(d) { %>
+        <% if(d.name){ %>
+            <li class="thisChurchIsSaved"><%= d.name %> <small>located at</small> <%= d.address %><span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span><br><small class="review_text"><%= d.review %></small></li>
+        <% } %>
+    <% }) %>
+</ul>
+</div>
+<script src="/javascripts/saved.js"></script>
 <%- include('partials/footer') %>

@@ -58,7 +58,7 @@ router.post('/register', (req, res, next)  => {
 
         res.redirect('/users');
       });
-    }).catch((err) => { res.status(500).json({ status: 'error' }); });
+    }).catch((err) => { res.status(500).json({ status: 'Registration Error: Username/Email already used.' }); });
   }
 });
 
