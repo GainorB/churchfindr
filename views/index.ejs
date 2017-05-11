@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-<h2 id="mainh2"><% if(user) { %> Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby. <% } else { %>Welcome to ChurchFindr. <% } %></h2>
+<h2 id="mainh2"><% if(user) { %> Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby. <% } else { %> <span class="welcome">Welcome to ChurchFindr</span> <% } %></h2>
         <% if(user) { %>
 <div id="wrapper">
       <div id="container">
@@ -18,13 +18,13 @@
       </div>
     </div>
     <% } else { %>
-    <p>HOW TO GET STARTED:
-  <ol>
-    <li><a href="/auth/register">MAKE A PROFILE</a></li>
-    <li><a href="/auth/login">THEN LOG INTO YOUR PROFILE</a></li>
-    <li><a href="">USE OUR APPLICATION TO FIND A CHURCH NEAR YOU!</a></li>
-    <li>SAVE VISITED CHURCHES TO YOUR PROFILE</li>
-    <li>HAD A GOOD TIME? LEAVE A REVIEW FOR THAT CHURCH</li>
+    <p class="started">5 easy steps to Get Started!
+  <ol class="started">
+    <li><a href="/auth/register">Register an account.</a></li>
+    <li><a href="/auth/login">From there, log into your new profile.</a></li>
+    <li><a href="/">Navigate to "Find a Church" to search for a church.</a></li>
+    <li>Once you find churches you can delete from your history or save to your profile.</li>
+    <li>Lastly, you can review churches that were saved to your profile.</li>
   </ol>
 </p>
         <% } %>
