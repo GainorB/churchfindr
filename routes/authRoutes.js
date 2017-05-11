@@ -58,7 +58,7 @@ router.post('/register', (req, res, next)  => {
 
         res.redirect('/users');
       });
-    }).catch((err) => { res.status(500).json({ status: 'Registration Error: Username/Email already used.' }); });
+    }).catch((err) => { res.status(500).json({ status: 'Registration Error: Username or Email already in use.' }); });
   }
 });
 
@@ -69,7 +69,7 @@ router.post('/login', passport.authenticate('local', {
   })
 );
 
-router.get('/logout', (req, res) => {
+router.get('/logout', authHelpers.loginRedirect, (req, res) => {
   req.logout();
   res.render('logout');
 });
