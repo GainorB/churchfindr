@@ -1,13 +1,13 @@
 <%- include('partials/header') %>
-<h2 id="mainh2">Welcome <% if(user) { %> back, <%= user.username %>. <% } else { %> to ChurchFindr. <% } %></h2>
+<h2 id="mainh2"><% if(user) { %> Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby. <% } else { %>Welcome to ChurchFindr. <% } %></h2>
         <% if(user) { %>
 <div id="wrapper">
       <div id="container">
         <form method="POST">
-          <input type="text" id="main_search" name="city" placeholder="Insert a city or zip code" required>
+          <input type="text" id="main_search" name="city" placeholder="" required>
       <div id="error_msg"><span id="error_msg_span"></span></div>
       <div id="button_div">
-          <input type="submit" id="submit" name="submit" value="find churches nearby">
+          <input type="submit" id="submit" name="submit" value="search">
           </form>
       </div>
           <div id="places">

@@ -93,10 +93,10 @@ function getSavedChurchesFromProfile(req, res, next){
 
 // EXPORT MODULES TO BE USED IN ROUTING
 module.exports = {
-    newChurch: newChurch,
-    getChurches: getChurches,
-    deleteChurch: deleteChurch,
-    reviewChurch: reviewChurch,
-    saveChurchToProfile: saveChurchToProfile,
-    getSavedChurchesFromProfile: getSavedChurchesFromProfile,
+    newChurch: newChurch, // CREATE
+    getChurches: getChurches, // READ
+    deleteChurch: deleteChurch, // DELETE
+    reviewChurch: reviewChurch, // UPDATE
+    saveChurchToProfile: saveChurchToProfile, // UPDATE
+    getSavedChurchesFromProfile: getSavedChurchesFromProfile, // READ
 };
