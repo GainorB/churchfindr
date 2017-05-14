@@ -1,32 +1,75 @@
 <%- include('partials/header') %>
-<h2 id="mainh2"><% if(user) { %> Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby. <% } else { %> <span class="welcome">Welcome to ChurchFindr</span> <% } %></h2>
-        <% if(user) { %>
-<div id="wrapper">
-      <div id="container">
-        <form method="POST">
-          <input type="text" id="main_search" name="city" placeholder="" required>
-      <div id="error_msg"><span id="error_msg_span"></span></div>
-      <div id="button_div">
-          <input type="submit" id="submit" name="submit" value="search">
-          </form>
-      </div>
-          <div id="places">
-            <% if(data != 0) { %>
-              <%- include('partials/churches') %>
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% if(user) { %>
+            <li role="presentation" class="active"><a href="/">Find a Church</a></li>
+            <li role="presentation"><a href="/users">My Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <% } else { %>
+            <li role="presentation" class="active"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/auth/register">Register</a></li>
+            <li role="presentation"><a href="/auth/login">Log In</a></li>
             <% } %>
-          </div>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Good News</h3>
+        <small id="slogan" class="text-muted">The gospel of good news is a person: Jesus of Nazareth.</small>
       </div>
-    </div>
-    <% } else { %>
-    <p class="started">5 easy steps to Get Started!
-  <ol class="started">
-    <li><a href="/auth/register">Register an account.</a></li>
-    <li><a href="/auth/login">From there, log into your new profile.</a></li>
-    <li><a href="/">Navigate to "Find a Church" to search for a church.</a></li>
-    <li>Once you find churches you can delete from your history or save to your profile.</li>
-    <li>Lastly, you can review churches that were saved to your profile.</li>
-  </ol>
-</p>
+      <% if(user) { %>
+      <!-- DISPLAY CHURCH SEARCH -->
+      <div id="inside">
+        <div id="center">
+          <h4>Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby.</h4>
+          
+          <form method="POST">
+              <label class="sr-only">Search</label>
+                <input type="text" id="church_search" title="Search" name="city" required>
+                <input type="submit" id="church_submit" name="submit" value="search">
+          </form>
+
+        <!-- DISPLAY CHURCHES FROM DATABASE -->
+        <% if(data != 0) { %>
+            <%- include('partials/churches') %>
         <% } %>
+
+      <!-- END CHURCH SEARCH -->
+
+            </div>
+      </div>
+      <% } else { %>
+      <div class="jumbotron">
+        <h4>Welcome to</h4>
+        <h1>Good News</h1>
+        <h4>The gospel is news—good news.</h4>
+        <p class="lead">Travel often? or just simply looking for a new church? Well you're in the right place. Use our tool to help you find churches nearby. Once you've found a church you want to visit, you can send an SMS to yourself with the churches name and address. You can also leave reviews for churches you visited. Create memories!</p>
+        <p><a class="btn btn-lg btn-success" href="/auth/register" role="button">Sign up today</a></p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>How to Get Started!</h4>
+          <p>
+            <ol>
+                <li><a href="/auth/register">Make a profile</a></li>
+                <li><a href="/auth/login">Log into your profile</a></li>
+                <li><a href="/">Use our tool to find a church near you</a></li>
+                <li>Find a church? Save it to your profile</li>
+                <li>Had a good time? Leave a review</li>
+            </ol>
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>Hear what others are saying..</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+        </div>
+      </div>
+      <% } %>
+    <%- include('partials/footer') %>
+    </div>
 <script src="/javascripts/main.js"></script>
-<%- include('partials/footer') %>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

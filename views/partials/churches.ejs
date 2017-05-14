@@ -1,7 +1,8 @@
-<ul>
+<br>
+<ul id="churches">
 <% data.forEach(function(d) { %>
     <% if(!d.profile) { %>
-    <li class="displayAddresses"><%= d.name %> <small>located at</small> <%= d.address %><span class="save" id="<%= d.id %>">SAVE</span><span class="delete" id="<%= d.id %>">DELETE</span></li>
+    <li class="displayChurches"><%= d.name %> <small>located at</small> <%= d.address %><span class="save" id="<%= d.id %>">SAVE</span><span class="delete" id="<%= d.id %>">DELETE</span></li>
     <% } %>
 <% }) %>
 </ul>

@@ -1,3 +1,20 @@
 <%- include('partials/header') %>
-<h2 id="mainh2">You are now logged out. Please come back soon.</h2>
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% if(user) { %>
+            <li role="presentation"><a href="/">Find a Church</a></li>
+            <li role="presentation"><a href="/users">My Profile</a></li>
+            <li role="presentation" class="active"><a href="/auth/logout">Log Out</a></li>
+            <% } else { %>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/auth/register">Register</a></li>
+            <li role="presentation" class="active"><a href="/auth/login">Log In</a></li>
+            <% } %>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Good News</h3>
+      </div>
+<h2>You are now logged out. Please come back soon.</h2>
 <%- include('partials/footer') %>

@@ -1,11 +1,37 @@
 <%- include('../partials/header') %>
-<div id="divUsers">
-<h2 id="mainh2">Account Login</h2>
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% if(user) { %>
+            <li role="presentation"><a href="/">Find a Church</a></li>
+            <li role="presentation" class="active"><a href="/users">My Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <% } else { %>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/auth/register">Register</a></li>
+            <li role="presentation" class="active"><a href="/auth/login">Log In</a></li>
+            <% } %>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Good News</h3>
+        <small id="slogan" class="text-muted">The gospel of good news is a person: Jesus of Nazareth.</small>
+      </div>
+      <div id="inside">
+        <div id="center">
+<h2 class="page-header">Account Login</h2>
 <h4>Logging in grants you access to finding churches</h4>
 <form action="/auth/login" method="post">
-    <input type="text" id="login_username" name="username" placeholder="Username" required><br>
-    <input type="password" id="login_password" name="password" placeholder="Password" required><br>
+    <div class="form-group">
+        <label class="sr-only">Username</label>
+    <input type="text" id="login_username" class="form-control" name="username" title="Username" placeholder="Username" required>
+        </div>
+    <div class="form-group">
+        <label class="sr-only">Password</label>
+    <input type="password" id="login_password" class="form-control" name="password" title="Password" placeholder="Password" required>
+        </div>
     <input type="submit" value="LOGIN" id="login_submit"> <input type="reset" value="RESET" id="login_reset">
 </form>
-</div>
+      </div>
+    </div>
 <%- include('../partials/footer') %>

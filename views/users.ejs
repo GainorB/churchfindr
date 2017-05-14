@@ -1,6 +1,25 @@
 <%- include('partials/header') %>
-<div id="divUsers">
-<h2 id="mainh2">Welcome to your profile <%= user.username %>!</h2>
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% if(user) { %>
+            <li role="presentation"><a href="/">Find a Church</a></li>
+            <li role="presentation" class="active"><a href="/users">My Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <% } else { %>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/auth/register">Register</a></li>
+            <li role="presentation" class="active"><a href="/auth/login">Log In</a></li>
+            <% } %>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Good News</h3>
+        <small id="slogan" class="text-muted">The gospel of good news is a person: Jesus of Nazareth.</small>
+      </div>
+      <div id="inside">
+        <div id="center">
+<h2 class="page-header">Welcome to your profile <%= user.username %>!</h2>
 <p>Below you will find a summary of your account information along with churches you saved to your profile.</p>
 <input type="text" id="register_firstname" name="firstname" placeholder="<%= user.firstname %>" readonly><br>
 <input type="text" id="register_lastname" name="lastname" placeholder="<%= user.lastname %>" readonly><br>
@@ -11,15 +30,17 @@
 <input type="text" id="register_zip" name="zipcode" placeholder="<%= user.zip %>" readonly><br>
 <input type="text" id="register_country" name="country" placeholder="<%= user.country %>" readonly><br>
 <p>Save a church to your profile, to leave a review!</p>
-</div>
-<div id="places">
-<ul>
-    <% data.forEach(function(d) { %>
-        <% if(d.name){ %>
-            <li class="thisChurchIsSaved"><%= d.name %> <small>located at</small> <%= d.address %><span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span><br><small class="review_text"><%= d.review %></small></li>
-        <% } %>
-    <% }) %>
-</ul>
-</div>
+
+<p>
+    <ul id="savedChurches">
+        <% data.forEach(function(d) { %>
+            <% if(d.name){ %>
+                <li class="thisChurchIsSaved"><%= d.name %> <small>located at</small> <%= d.address %><span class="review" id="<%= d.id %>">REVIEW?</span><span class="delete" id="<%= d.id %>">DELETE</span><br><small class="review_text"><%= d.review %></small><br></li>
+            <% } %>
+        <% }) %>
+    </ul>
+</p>
+      </div>
+    </div>
 <script src="/javascripts/saved.js"></script>
 <%- include('partials/footer') %>

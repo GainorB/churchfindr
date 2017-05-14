@@ -1,21 +1,14 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ChurchFindr</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
-  </head>
-  <body>
-    <img src="/images/banner.jpg" id="banner">
-    <ul id="nav">
-        <% if(user) { %>
-      <li><a href="/">FIND A CHURCH</a></li>
-      <li><a href="/users">MY PROFILE</a></li>
-      <li><a href="/auth/logout">LOG OUT</a></li>
-        <% } else { %>
-      <li><a href="/">HOME</a></li>
-      <li><a href="/auth/register">REGISTER AN ACCOUNT</a></li>
-      <li><a href="/auth/login">LOG IN</a></li>
-        <% } %>
-    </ul>
+    <title>Good News</title>
+</head>
+<body>
