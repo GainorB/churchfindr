@@ -4,7 +4,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find a Church</a></li>
+            <li role="presentation"><a href="/">Find A Church</a></li>
             <li role="presentation"><a href="/users">My Profile</a></li>
             <li role="presentation" class="active"><a href="/auth/logout">Log Out</a></li>
             <% } else { %>
@@ -15,6 +15,7 @@
           </ul>
         </nav>
         <h3 class="text-muted">Good News</h3>
+        <small id="slogan" class="text-muted">The gospel of good news is a person: Jesus of Nazareth.</small>
       </div>
 <h2>You are now logged out. Please come back soon.</h2>
 <%- include('partials/footer') %>

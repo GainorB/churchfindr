@@ -4,7 +4,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find a Church</a></li>
+            <li role="presentation"><a href="/">Find A Church</a></li>
             <li role="presentation" class="active"><a href="/users">My Profile</a></li>
             <li role="presentation"><a href="/auth/logout">Log Out</a></li>
             <% } else { %>
@@ -29,6 +29,7 @@
 <input type="text" id="register_state" name="state" placeholder="<%= user.state %>" readonly><br>
 <input type="text" id="register_zip" name="zipcode" placeholder="<%= user.zip %>" readonly><br>
 <input type="text" id="register_country" name="country" placeholder="<%= user.country %>" readonly><br>
+<br>
 <p>Save a church to your profile, to leave a review!</p>
 
 <p>
