@@ -2,7 +2,7 @@ const request = require('request');
 
 var getChurch = (city, callback) => {
     request({
-        url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&type=church&rankBy=distance&key=AIzaSyAppwgf_zKgZd66IXWEQ6wllHT0n0zEMpA`,
+        url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${city}&type=church&rankBy=distance&key=${process.env.API_KEY}`,
         json: true
     }, (err, res, body) => {
         if (err) {

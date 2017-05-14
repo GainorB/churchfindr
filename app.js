@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(session({
-  secret: "78FSFHJHJBaj98am8sj23728hsas09xvbcvxm",
+  secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true,
 }));
