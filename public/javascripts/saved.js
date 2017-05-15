@@ -3,6 +3,7 @@ console.log("saved.js is connected.");
 // GRAB DOM ELEMENTS
 var deleteBTN = document.querySelectorAll('.delete');
 var reviewBTN = document.querySelectorAll('.review');
+var smsBTN = document.querySelectorAll('.sms');
 
 // DELETE
 deleteBTN.forEach(function(element, index) {
@@ -29,7 +30,7 @@ reviewBTN.forEach(function(element, index) {
     //CREATE INPUT
     var input = document.createElement('input');
     input.type = "text";
-    input.placeholder = "Leave a review. Click Enter to save."
+    input.placeholder = "Type a review. Click Enter to save."
     input.setAttribute('id', 'review_input');
     parent.appendChild(input);
 
@@ -41,6 +42,40 @@ reviewBTN.forEach(function(element, index) {
             axios.patch('https://immense-temple-47734.herokuapp.com/reviews/'+id, {
                 review: grabReview,
                 id: id
+            });
+        });
+    });
+});
+
+// SMS
+smsBTN.forEach(function(element, index) {
+    element.addEventListener('click', function(){
+
+    let id = element.getAttribute('id');
+    console.log('SMS Clicked '+id);
+    let parent = element.parentNode;
+
+    // GRAB THE ADDRESS
+    let address = element.parentNode.textContent;
+    address = address.substring(0, address.indexOf('|'));
+
+    console.log(address);
+
+    //CREATE INPUT
+    var input = document.createElement('input');
+    input.type = "text";
+    input.placeholder = "Type phone number, then Click Enter."
+    input.setAttribute('id', 'review_input');
+    parent.appendChild(input);
+
+        input.addEventListener('change', function(){
+            var phoneNumber = document.getElementById('review_input').value;
+            console.log("address: "+address + " number: " +phoneNumber);
+
+            // AXIOS PATCH ROUTE
+            axios.patch('https://immense-temple-47734.herokuapp.com/sms', {
+                number: phoneNumber,
+                address: address
             });
         });
     });

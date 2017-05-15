@@ -23,4 +23,10 @@ router.patch('/reviews/:id', db.reviewChurch);
 */
 router.patch('/savetoprofile/:id', db.saveChurchToProfile);
 
+/*
+* SMS
+*/
+
+router.patch('/sms', db.sendSMS);
+
 module.exports = router;

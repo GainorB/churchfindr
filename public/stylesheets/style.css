@@ -211,21 +211,33 @@ ERRORS ON REGISTER/LOGIN FORMS
   margin-bottom: 5px;
   font-weight: lighter;
   letter-spacing: 2px;
+  color: black;
 }
 
 /*
-* DELETE/SAVE/REVIEW BUTTONS
+* DELETE/SAVE/SMS/REVIEW BUTTONS
 */
+
+.hideme {
+  visibility: hidden;
+}
+
 .delete {
   float: right;
   font-size: 12px;
 }
 
 .save,
-.review {
+.review,
+.sms {
   float: right;
   font-size: 12px;
   margin-left: 5px;
+}
+
+.sms:hover {
+  color: blue;
+  border-bottom: 2px solid blue;
 }
 
 .delete:hover {

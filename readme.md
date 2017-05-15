@@ -44,7 +44,7 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
 1. Incorporating Google Reviews
 2. ~~Leave reviews in the app~~
 3. ~~Save visited churches to profile~~
-4. Text a user the address of the church they chose
+4. ~~Text a user the address of the church they chose~~
 5. ~~Give each user unique searches, pretty much two users don't see what the other searched~~
 
 ### TECHNOLOGIES USED
@@ -94,6 +94,8 @@ https://trello.com/b/eZZITrSf/churchfindr-find-a-church-near-you
     * Used to manage Cross Origin issues
 13. Request
     * Make HTTP calls (Used to GET Google API)
+14. Twilio
+    * Send SMS Using Twilio Node Module
 
 ### DOWNLOAD PROJECT & INSTALL
 1. Git clone or download this project

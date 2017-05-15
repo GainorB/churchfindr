@@ -1,5 +1,7 @@
 var db = require('../db/config');
 const church = require('../church/church');
+var twilio = require('twilio');
+const client = new twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
 
 // ADD PLACES TO DATABASE
 function newChurch(req, res, next){
@@ -91,6 +93,20 @@ function getSavedChurchesFromProfile(req, res, next){
         });
 }
 
+// SEND SMS
+function sendSMS(req, res, next){
+    var number = parseInt(req.body.number);
+    console.log(number);
+    var address = req.body.address;
+    console.log(address);
+
+    client.messages.create({
+    body: `Thanks for using Good News, the address you requested: ${address}.`,
+    to: `${number}`,  // Text this number
+    from: `${process.env.TWILIO_PHONENUMBER}` // From a valid Twilio number
+        }).then((message) => console.log(message.sid));
+}
+
 // EXPORT MODULES TO BE USED IN ROUTING
 module.exports = {
     newChurch: newChurch, // CREATE
@@ -99,4 +115,5 @@ module.exports = {
     reviewChurch: reviewChurch, // UPDATE
     saveChurchToProfile: saveChurchToProfile, // UPDATE
     getSavedChurchesFromProfile: getSavedChurchesFromProfile, // READ
+    sendSMS: sendSMS,
 };
