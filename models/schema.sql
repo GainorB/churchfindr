@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users(
     lastname VARCHAR(255),
     password VARCHAR(255),
     email VARCHAR(255) UNIQUE NOT NULL,
+    phonenumber BIGINT,
     street VARCHAR(255),
     city VARCHAR(255),
     state VARCHAR(255),

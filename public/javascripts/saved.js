@@ -49,7 +49,7 @@ reviewBTN.forEach(function(element, index) {
 
 // SMS
 smsBTN.forEach(function(element, index) {
-    element.addEventListener('click', function(){
+    element.addEventListener('dblclick', function(){
 
     let id = element.getAttribute('id');
     console.log('SMS Clicked '+id);
@@ -61,22 +61,9 @@ smsBTN.forEach(function(element, index) {
 
     console.log(address);
 
-    //CREATE INPUT
-    var input = document.createElement('input');
-    input.type = "text";
-    input.placeholder = "Type phone number, then Click Enter."
-    input.setAttribute('id', 'review_input');
-    parent.appendChild(input);
-
-        input.addEventListener('change', function(){
-            var phoneNumber = document.getElementById('review_input').value;
-            console.log("address: "+address + " number: " +phoneNumber);
-
-            // AXIOS PATCH ROUTE
-            axios.patch('https://immense-temple-47734.herokuapp.com/sms', {
-                number: phoneNumber,
-                address: address
-            });
+        // AXIOS PATCH ROUTE
+        axios.patch('https://immense-temple-47734.herokuapp.com/sms', {
+            address: address
         });
     });
 });

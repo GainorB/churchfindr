@@ -20,6 +20,7 @@ function createNewUser(req, res) {
     lastname: req.body.lastname,
     password: hash,
     email: req.body.email,
+    phonenumber: req.body.phonenumber,
     street: req.body.street,
     city: req.body.city,
     state: req.body.state,

@@ -115,6 +115,7 @@ footer {
 #register_lastname,
 #register_email,
 #register_password,
+#register_phonenumber,
 #register_street,
 #register_zip,
 #register_city,
@@ -235,7 +236,8 @@ ERRORS ON REGISTER/LOGIN FORMS
   margin-left: 5px;
 }
 
-.sms:hover {
+.sms:hover,
+.smsText:hover {
   color: blue;
   border-bottom: 2px solid blue;
 }

@@ -10,10 +10,10 @@ User.create = user => {
  return db.one(
     `
       INSERT INTO users
-      (username, firstname, lastname, password, email, street, city, state, country, zip)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *
+      (username, firstname, lastname, password, email, phonenumber, street, city, state, country, zip)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *
     `,
-    [user.username, user.firstname, user.lastname, user.password, user.email, user.street, user.city, user.state, user.country, user.zip]
+    [user.username, user.firstname, user.lastname, user.password, user.email, user.phonenumber, user.street, user.city, user.state, user.country, user.zip]
   )
 };
 

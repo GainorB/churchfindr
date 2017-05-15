@@ -19,6 +19,7 @@ router.post('/register', (req, res, next)  => {
   var firstname = req.body.firstname;
   var lastname = req.body.lastname;
   var email = req.body.email;
+  var phonenumber = req.body.phonenumber;
 
   // PASSWORD
   var password = req.body.password;
@@ -36,6 +37,7 @@ router.post('/register', (req, res, next)  => {
   req.checkBody('firstname', 'First Name is required').notEmpty();
   req.checkBody('lastname', 'Last Name is required').notEmpty();
   req.checkBody('email', 'Email is required').isEmail();
+  req.checkBody('phonenumber', 'Phone Number is required').isInt();
 
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(password);

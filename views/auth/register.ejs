@@ -28,7 +28,6 @@
         <% } %>
     <% } %>
 </ul>
-
 <p>Please take some time to register</p>
 <p>A profile gives you access to finding churches near you. Registering only takes a few minutes!</p>
 <form method='POST' action='/auth/register'>
@@ -55,6 +54,10 @@
     <div class="form-group">
         <label class="sr-only">Confirm Password</label>
     <input type="password" id="register_password" class="form-control" name="password2" title="Confirm Password" placeholder="Confirm Password">
+        </div>
+    <div class="form-group">
+        <label class="sr-only">Phone Number</label>
+    <input type="text" id="register_phonenumber" class="form-control" name="phonenumber" title="Phone Number" placeholder="Phone Number (no symbols)">
         </div>
     <div class="form-group">
         <label class="sr-only">Street</label>

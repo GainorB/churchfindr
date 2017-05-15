@@ -95,7 +95,7 @@ function getSavedChurchesFromProfile(req, res, next){
 
 // SEND SMS
 function sendSMS(req, res, next){
-    var number = parseInt(req.body.number);
+    var number = parseInt(req.user.phonenumber);
     console.log(number);
     var address = req.body.address;
     console.log(address);
