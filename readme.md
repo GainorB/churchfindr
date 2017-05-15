@@ -1,7 +1,7 @@
 # CHURCHFINDR
 An application that finds local churches or churches using a zip code, with YELP reviews to help the user to find a comfortable fit. Possibly use Google Reviews if it is tied into the Maps API.
 
-LIVE! https://immense-temple-47734.herokuapp.com/
+LIVE! https://churchfindr.herokuapp.com/
 
 ### WIREFRAMING
 
