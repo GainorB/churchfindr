@@ -14,7 +14,7 @@ deleteBTN.forEach(function(element, index){
     element.parentNode.parentNode.removeChild(element.parentNode);
     
     // AXIOS DELETE ROUTE
-    axios.delete('https://immense-temple-47734.herokuapp.com/'+id);
+    axios.delete('https://churchfindr.herokuapp.com/'+id);
     });
 });
 
@@ -26,6 +26,6 @@ savedBTN.forEach(function(element, index){
     console.log('Saved Clicked '+id);
     
     // AXIOS PATCH ROUTE
-    axios.patch('https://immense-temple-47734.herokuapp.com/savetoprofile/'+id);
+    axios.patch('https://churchfindr.herokuapp.com/savetoprofile/'+id);
     });
 });
