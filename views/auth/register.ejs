@@ -20,11 +20,11 @@
       <div id="inside">
         <div id="center">
 <h1 class="page-header">Account Registration</h1>
-<ul id="errors">
+<ul>
     <% if(errors){ %>
         <p>There are errors on the page, please fix to continue:</p>
         <% for(const error of errors){ %>
-            <li><%= error.msg %></li>
+            <li id="errors"><%= error.msg %></li>
         <% } %>
     <% } %>
 </ul>
@@ -79,6 +79,7 @@
         <label class="sr-only">Country</label>
     <input type="text" id="register_country" class="form-control" name="country" title="Country" placeholder="Country">
         </div>
+        <p>Already have an account? <a href="/auth/login">Log In</a></p>
 <input type="submit" value="REGISTER" id="register_submit"> <input type="reset" value="RESET" id="register_reset">
 </form>
       </div>

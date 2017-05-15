@@ -33,20 +33,20 @@ router.post('/register', (req, res, next)  => {
   var country = req.body.country;
 
   // VALIDATION
-  req.checkBody('username', 'User Name is required').notEmpty();
-  req.checkBody('firstname', 'First Name is required').notEmpty();
-  req.checkBody('lastname', 'Last Name is required').notEmpty();
-  req.checkBody('email', 'Email is required').isEmail();
-  req.checkBody('phonenumber', 'Phone Number is required').isInt();
+  req.checkBody('username', 'User Name is required.').notEmpty();
+  req.checkBody('firstname', 'First Name is required.').notEmpty();
+  req.checkBody('lastname', 'Last Name is required.').notEmpty();
+  req.checkBody('email', 'Email is required.').isEmail();
+  req.checkBody('phonenumber', 'Phone Number is required, only 10 digits.').isInt().len(10, 10);
 
-  req.checkBody('password', 'Password is required').notEmpty();
-  req.checkBody('password2', 'Passwords do not match').equals(password);
+  req.checkBody('password', 'Password is required.').notEmpty();
+  req.checkBody('password2', 'Passwords do not match.').equals(password);
 
-  req.checkBody('street', 'Street is required').notEmpty();
-  req.checkBody('zipcode', 'Zip Code is required').isInt();
-  req.checkBody('city', 'City is required').notEmpty();
-  req.checkBody('state', 'State is required').notEmpty();
-  req.checkBody('country', 'Country is required').notEmpty();
+  req.checkBody('street', 'Street is required.').notEmpty();
+  req.checkBody('zipcode', 'Zip Code is required, only 5 digits.').isInt().len(5, 5);
+  req.checkBody('city', 'City is required.').notEmpty();
+  req.checkBody('state', 'State is required.').notEmpty();
+  req.checkBody('country', 'Country is required.').notEmpty();
 
   var errors = req.validationErrors();
 

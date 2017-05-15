@@ -45,6 +45,7 @@ footer {
   margin-bottom: 5px;
   font-weight: lighter;
   letter-spacing: 2px;
+  color: #337ab7;
 }
 
 #church_submit {
@@ -73,7 +74,7 @@ footer {
 #login_password {
   width: 400px;
   height: 50px;
-  font-size: 30px;
+  font-size: 20px;
   padding: 10px 10px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -121,7 +122,7 @@ footer {
 #register_city,
 #register_state,
 #register_country {
-  width: 600px;
+  width: 500px;
   height: 50px;
   font-size: 20px;
   padding: 10px 10px;
@@ -131,6 +132,7 @@ footer {
   margin-bottom: 5px;
   font-weight: lighter;
   letter-spacing: 2px;
+  color: #337ab7;
 }
 
 #register_submit,
@@ -159,21 +161,18 @@ footer {
 /*
 ERRORS ON REGISTER/LOGIN FORMS
 */
-#errors {
-  color: black;
-  font-size: 14px;
-}
 
-#errors li {
-  list-style-type: none; 
-  padding: 5px; margin: 5px;
+#errors {
+  padding: 5px;
   display: block;
-  width: 300px;
+  width: 400px;
   border: 1px solid red;
   background-color: #ffa5a5;
+  margin: 5px auto;
+  text-align: left;
 }
 
-#errors li:hover {
+#errors:hover {
   background-color: #ff4747;
 }
 
@@ -194,11 +193,11 @@ ERRORS ON REGISTER/LOGIN FORMS
   border: 1px solid #dddddd;
   background-color: #e6e2eb;
   text-align: left;
+  font-size: 13px;
 }
 
 .thisChurchIsSaved:hover {
   background-color: #d1c9da;
-  color: white;
 }
 
 #review_input {
@@ -278,10 +277,9 @@ ERRORS ON REGISTER/LOGIN FORMS
   border: 1px solid #dddddd;
   background-color: #e6e2eb;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .displayChurches:hover {
   background-color: #d1c9da;
-  color: white;
 }
