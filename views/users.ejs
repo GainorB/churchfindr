@@ -37,7 +37,7 @@
     <ul id="savedChurches">
         <% data.forEach(function(d) { %>
             <% if(d.name){ %>
-                <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><em><%= d.address %></em></span><span class="hideme">|</span><br><small class="review_text"><%= d.review %></small><br><span class="sms" id="<%= d.id %>">SEND A SMS</span> <span class="review" id="<%= d.id %>">LEAVE A REVIEW</span> <span class="delete" id="<%= d.id %>">DELETE FROM PROFILE</span></li>
+                <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><span class="hideme">|</span><br><small class="review_text"><% if(d.review){ %><em>"<%= d.review %>"</em><% } %></small><br><span class="sms" id="<%= d.id %>">SEND A SMS</span> <span class="review" id="<%= d.id %>">LEAVE A REVIEW</span> <span class="delete" id="<%= d.id %>">DELETE FROM PROFILE</span></li>
             <% } %>
         <% }) %>
     </ul>
