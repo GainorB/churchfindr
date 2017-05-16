@@ -1,6 +1,6 @@
-body {
+/*body {
   font-family: 'Open Sans', sans-serif;
-}
+}*/
 
 footer {
     margin-top: 70px;
@@ -191,13 +191,12 @@ ERRORS ON REGISTER/LOGIN FORMS
   display: block;
   width: 100%;
   border: 1px solid #dddddd;
-  background-color: #e6e2eb;
-  text-align: left;
-  font-size: 13px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
 .thisChurchIsSaved:hover {
-  background-color: #d1c9da;
+  background-color: #ebebeb;
 }
 
 #review_input {
@@ -222,43 +221,41 @@ ERRORS ON REGISTER/LOGIN FORMS
   visibility: hidden;
 }
 
-.delete {
-  float: right;
-  font-size: 12px;
-}
-
 .save,
 .review,
-.sms {
-  float: right;
-  font-size: 12px;
-  margin-left: 5px;
+.sms,
+.delete {
+  font-size: 12.5px;
+  text-align: center;
+  margin-left: 15px;
+  margin-top: 15px;
+  display: inline-block;
 }
 
 .sms:hover,
 .smsText:hover {
   color: blue;
-  border-bottom: 2px solid blue;
+  border-bottom: 1px solid blue;
 }
 
 .delete:hover {
   color: red;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid red;
 }
 
 .review:hover {
   color: green;
-  border-bottom: 2px solid green;
+  border-bottom: 1px solid green;
 }
 
 .save:hover {
-  color: yellow;
-  border-bottom: 2px solid yellow;
+  color: gold;
+  border-bottom: 1px solid gold;
 }
 
 .review_text {
     color: green;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 /*
@@ -270,16 +267,25 @@ ERRORS ON REGISTER/LOGIN FORMS
 }
 
 .displayChurches {
-  list-style-type: none;
+  color: black;
+  list-style-type: none; 
   padding: 5px; margin: 5px;
   display: block;
   width: 100%;
   border: 1px solid #dddddd;
-  background-color: #e6e2eb;
-  text-align: left;
-  font-size: 13px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
 .displayChurches:hover {
-  background-color: #d1c9da;
+  background-color: #ebebeb;
+}
+
+.churchName {
+  font-size: 15px;
+  letter-spacing: 1.5px;
+}
+
+.churchAddress {
+  display: inline-block;
 }
