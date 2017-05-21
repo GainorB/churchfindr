@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS churches(
     id SERIAL PRIMARY KEY,
     name TEXT,
     address TEXT,
+    lat FLOAT8,
+    lng FLOAT8,
     review TEXT,
     profile INTEGER,
     searchprofile INTEGER

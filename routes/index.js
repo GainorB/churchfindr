@@ -5,6 +5,9 @@ var db = require('../db/queries');
 // GET FROM DATABASE
 router.get('/', db.getChurches);
 
+// API
+router.get('/api/churches', db.getChurchesAPI);
+
 // POST TO DATABASE
 router.post('/', db.newChurch);
 

@@ -9,9 +9,9 @@ function newChurch(req, res, next){
         if (err) {
             console.log(err);
         } else {
-            console.log(results);
-            console.log("User ID "+ parseInt(req.user.id));
-            return db.task(t=>t.batch(results.map(r=>t.none('INSERT INTO churches(name, address, searchprofile)' + 'values($1, $2, $3)', [r.name, r.address, parseInt(req.user.id)]))))
+            //console.log(results);
+            //console.log("User ID "+ parseInt(req.user.id));
+            return db.task(t=>t.batch(results.map(r=>t.none('INSERT INTO churches(name, address, lat, lng, searchprofile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
                      .then(function(data){ res.redirect('/'); })
                      .catch(function(err){ return next(err); });
         };
@@ -26,7 +26,7 @@ function getChurches(req, res, next){
         
         db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
         .then(function(data){
-            res.render('index', { data: data })
+            res.render('index', {data})
         })
         .catch(function(err) {
             return next(err);
@@ -34,7 +34,31 @@ function getChurches(req, res, next){
     } else {
         db.any('SELECT * FROM churches')
         .then(function(data){
-            res.render('index', { data: data })
+            res.render('index', {data})
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+    }
+}
+
+// GET ALL CHURCHES API
+function getChurchesAPI(req, res, next){
+
+    if(typeof (req.user) !== "undefined"){
+        var userID = parseInt(req.user.id);
+        
+        db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
+        .then(function(data){
+            res.status(200).json({data});
+        })
+        .catch(function(err) {
+            return next(err);
+        });
+    } else {
+        db.any('SELECT * FROM churches')
+        .then(function(data){
+            res.status(200).json({data});
         })
         .catch(function(err) {
             return next(err);
@@ -109,11 +133,12 @@ function sendSMS(req, res, next){
 
 // EXPORT MODULES TO BE USED IN ROUTING
 module.exports = {
-    newChurch: newChurch, // CREATE
-    getChurches: getChurches, // READ
-    deleteChurch: deleteChurch, // DELETE
-    reviewChurch: reviewChurch, // UPDATE
-    saveChurchToProfile: saveChurchToProfile, // UPDATE
-    getSavedChurchesFromProfile: getSavedChurchesFromProfile, // READ
-    sendSMS: sendSMS,
+    newChurch, // CREATE
+    getChurches, // READ
+    deleteChurch, // DELETE
+    reviewChurch, // UPDATE
+    saveChurchToProfile, // UPDATE
+    getSavedChurchesFromProfile, // READ
+    sendSMS,
+    getChurchesAPI,
 };
