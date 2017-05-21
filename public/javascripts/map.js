@@ -2,15 +2,13 @@ console.log('map.js is connected');
 
 const locations = [];
 
-axios.get("http://localhost:3000/api/churches")
+axios.get("https://churchfindr.herokuapp.com/api/churches")
     .then((data) => {
         data.data.data.forEach((element) => {
             locations.push({lat: element.lat, lng: element.lng }) 
         });
         initMap();
     }).catch((err) => console.log(err));
-
-console.log(locations[1].lat);
 
 function initMap(){
     var map = new google.maps.Map(document.getElementById('map'), {
