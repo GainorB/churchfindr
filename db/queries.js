@@ -48,7 +48,7 @@ function getChurchesAPI(req, res, next){
     if(typeof (req.user) !== "undefined"){
         var userID = parseInt(req.user.id);
         
-        db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
+        db.any('SELECT name, address, lat, lng FROM churches where searchprofile = $1', userID)
         .then(function(data){
             res.status(200).json({data});
         })
