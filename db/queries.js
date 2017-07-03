@@ -9,8 +9,7 @@ function newChurch(req, res, next){
         if(err) {
             console.log(err);
         } else {
-            //console.log(results);
-            //console.log("User ID "+ parseInt(req.user.id));
+
             return db.task(t => t.batch(results.map(r => t.none('INSERT INTO churches(name, address, lat, lng, searchprofile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
                      .then(data => { res.redirect('/'); })
                      .catch(err => { return next(err); });

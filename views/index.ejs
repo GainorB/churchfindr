@@ -4,7 +4,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation" class="active"><a href="/">Find Churches</a></li>
+            <li role="presentation" class="active"><a href="/">Find churches</a></li>
             <li role="presentation"><a href="/users">Profile</a></li>
             <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
@@ -26,7 +26,7 @@
           
           <form method="POST">
               <label class="sr-only">Search</label>
-                <input type="text" id="church_search" title="Search" name="city" value="<%= user.zip %>" required>
+                <input type="text" id="church_search" title="Search" name="city" value="<%= user.zip %>" required><br>
                 <input type="submit" name="submit" value="search">
                 <input type="reset" name="reset" value="reset">
           </form>

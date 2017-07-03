@@ -4,7 +4,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find Churches</a></li>
+            <li role="presentation"><a href="/">Find churches</a></li>
             <li role="presentation" class="active"><a href="/users">Profile</a></li>
             <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
@@ -20,7 +20,7 @@
       <div id="inside">
         <div id="center">
         <p><%- messages('message', locals) %></p>
-<h2 class="page-header">Welcome to your profile <%= user.username %>!</h2>
+<h2>Welcome to your profile <%= user.username %>!</h2>
 <p>Below you will find a summary of your account information along with churches you saved to your profile.</p>
 <textarea readonly rows="4" cols="70">
 <%= user.firstname %> <%= user.lastname %>&#013;&#013;
@@ -30,11 +30,11 @@
 <br>
 <p>
 <% if(data.length != 0) { %>
-    <% data.forEach(function(d) { %>
         <h3>Saved Churches</h3>
+    <% data.forEach(function(d) { %>
         
         <ul id="savedChurches">
-            <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><p class="ce" id="<%= d.id %>" contenteditable="true">Type your review here, then double click your review to submit it.</p><% if(d.review){ %><small class="review_text"><em>"<%= d.review %>"</em></small><br><% } %><a href="/profile/sms/<%= d.id %>"><span class="sms">SEND SMS</span></a> <a href="/profile/delete/<%= d.id %>"><span class="delete">DELETE FROM PROFILE</span></a></li>
+            <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><p class="ce" id="<%= d.id %>" contenteditable="true">Edit this text to leave a review, then double click your review to submit it.</p><% if(d.review){ %><small class="review_text"><em>"<%= d.review %>"</em></small><br><% } %><div class="review" id="<%= d.id %>">SUBMIT REVIEW</div> <a href="/profile/sms/<%= d.id %>"><span class="sms">SEND SMS</span></a> <a href="/profile/delete/<%= d.id %>"><span class="delete">DELETE FROM PROFILE</span></a></li>
         </ul>
     <% }) %>
 

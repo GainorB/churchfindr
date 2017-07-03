@@ -65,7 +65,7 @@ FLASH MESSAGES
 */
 
 #church_search {
-  width: 700px;
+  width: 600px;
   height: 70px;
   font-size: 40px;
   padding: 10px 10px;
@@ -76,6 +76,7 @@ FLASH MESSAGES
   font-weight: lighter;
   letter-spacing: 2px;
   color: #337ab7;
+  text-align: center;
 }
 
 .id {
@@ -179,37 +180,28 @@ ERRORS ON REGISTER/LOGIN FORMS
   background-color: #ebebeb;
 }
 
-#review_input {
-  width: 500px;
-  height: 50px;
-  font-size: 20px;
-  padding: 10px 10px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 2px solid #ccc;
-  margin-bottom: 5px;
-  font-weight: lighter;
-  letter-spacing: 2px;
-  color: black;
-}
-
 /*
 * DELETE/SAVE/SMS/REVIEW BUTTONS
 */
 
-.hideme {
-  visibility: hidden;
-}
-
 .save,
-.review,
 .sms,
 .delete {
   font-size: 12.5px;
   text-align: center;
   margin-left: 15px;
-  margin-top: 15px;
+  margin-top: 7px;
   display: inline-block;
+}
+
+.review {
+  font-size: 12.5px;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  color: #347bb7;
+  display: none;
 }
 
 .sms:hover,
@@ -223,10 +215,10 @@ ERRORS ON REGISTER/LOGIN FORMS
   border-bottom: 1px solid red;
 }
 
-.review:hover {
+/*.review:hover {
   color: green;
   border-bottom: 1px solid green;
-}
+}*/
 
 .save:hover {
   color: gold;
@@ -243,12 +235,12 @@ ERRORS ON REGISTER/LOGIN FORMS
 */
 
 #churches {
-    margin-left: -50px;
+  margin-left: -50px;
+  list-style-type: none; 
 }
 
 .displayChurches {
   color: black;
-  list-style-type: none; 
   padding: 5px; margin: 5px;
   display: block;
   width: 100%;
@@ -277,28 +269,42 @@ ERRORS ON REGISTER/LOGIN FORMS
 
 @media (max-width: 800px){
 
-    input[type=text], 
-    input[type=password],
-    input[type=number],
-    input[type=url],
-    input[type=email],
-    textarea {
-        width: 330px;
-        font-size: 17px;
-    }
+  input[type=text], 
+  input[type=password],
+  input[type=number],
+  input[type=url],
+  input[type=email],
+  textarea {
+    width: 330px;
+    font-size: 20px;
+    font-weight: 400;
+    border: 2px solid #ccc;
+    border-radius: 0;
+  }
 
   input[type=submit], 
   input[type=reset] {
-        width: 100px;
-        height: 30px;
+    width: 100px;
+    height: 30px;
   }
 
   #church_search { 
-        width: 330px;
-        font-size: 30px;
+    width: 330px;
+    font-size: 30px;
+    font-weight: 400;
+    border: 2px solid #ccc;
+    border-radius: 0;
   }
 
   textarea {
-    height: 200px;
+    height: 220px;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  .review {
+    display: block;
   }
 }
