@@ -14,6 +14,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const expressValidator = require('express-validator');
@@ -33,6 +34,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// EXPRESS FLASH MIDDLEWARE
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
 
 // EXPRESS VALIDATOR MIDDLEWARE
 app.use(expressValidator({

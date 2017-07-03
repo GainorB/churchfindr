@@ -12,25 +12,9 @@ router.get('/register', authHelpers.loginRedirect, (req, res) => {
   res.render('auth/register', { errors: errors });
 });
 
-router.post('/register', (req, res, next)  => {
-   
-  // IDENTITY
-  var username = req.body.username;
-  var firstname = req.body.firstname;
-  var lastname = req.body.lastname;
-  var email = req.body.email;
-  var phonenumber = req.body.phonenumber;
+router.post('/register', (req, res, next) => {
 
-  // PASSWORD
-  var password = req.body.password;
-  var password2 = req.body.password2;
-
-  // ADDRESS
-  var street = req.body.street;
-  var zipcode = req.body.zipcode;
-  var city = req.body.city;
-  var state = req.body.state;
-  var country = req.body.country;
+  const { username, firstname, lastname, email, phonenumber, password, street, zipcode, city, state, country } = req.body;
 
   // VALIDATION
   req.checkBody('username', 'User Name is required.').notEmpty();
@@ -50,30 +34,44 @@ router.post('/register', (req, res, next)  => {
 
   var errors = req.validationErrors();
 
-  if(errors){
+  if (errors) {
+    req.flash('error', "There was a problem during registration, please fix the errors below:");
     res.render('auth/register', { errors: errors });
   } else {
+
     authHelpers.createNewUser(req, res).then((user) => {
-        req.login(user, (err) => {
-      
-        if(err) return next(err);
+
+      req.login(user, (err) => {
+
+        if (err) return next(err);
 
         res.redirect('/users');
       });
-    }).catch((err) => { res.status(500).json({ status: 'Registration Error: Username or Email already in use.' }); });
+
+    }).catch((err) => {
+      console.log(err);
+      if (err.detail.includes("email")) {
+        req.flash('error', `Registration Error: Email already in use.`);
+        res.redirect('register');
+      } else if (err.detail.includes("username")) {
+        req.flash('error', `Registration Error: Username already in use.`);
+        res.redirect('register');
+      }
+    });
   }
 });
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/users',
     failureRedirect: '/auth/login',
-    failureFlash: true
+    failureFlash: 'Invalid Username or Password.'
   })
 );
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.render('logout');
+  req.flash('success', "You're now logged out.");
+  res.redirect('/auth/login');
 });
 
 module.exports = router;

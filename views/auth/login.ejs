@@ -4,13 +4,13 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find A Church</a></li>
-            <li role="presentation" class="active"><a href="/users">My Profile</a></li>
-            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <li role="presentation"><a href="/">Find Churches</a></li>
+            <li role="presentation" class="active"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation"><a href="/">Home</a></li>
             <li role="presentation"><a href="/auth/register">Register</a></li>
-            <li role="presentation" class="active"><a href="/auth/login">Log In</a></li>
+            <li role="presentation" class="active"><a href="/auth/login">Login</a></li>
             <% } %>
           </ul>
         </nav>
@@ -20,17 +20,18 @@
       <div id="inside">
         <div id="center">
 <h2 class="page-header">Account Login</h2>
+<p><%- messages('message', locals) %></p>
 <form action="/auth/login" method="post">
     <div class="form-group">
         <label class="sr-only">Username</label>
-    <input type="text" id="login_username" class="form-control" name="username" title="Username" placeholder="Username" required>
+    <input type="text" class="form-control" name="username" title="Username" placeholder="Username" required>
         </div>
     <div class="form-group">
         <label class="sr-only">Password</label>
-    <input type="password" id="login_password" class="form-control" name="password" title="Password" placeholder="Password" required>
+    <input type="password" class="form-control" name="password" title="Password" placeholder="Password" required>
         </div>
         <p>Don't have an account? <a href="/auth/register">Register Now</a></p>
-    <input type="submit" value="LOGIN" id="login_submit"> <input type="reset" value="RESET" id="login_reset">
+    <input type="submit" value="LOGIN"> <input type="reset" value="RESET">
 </form>
       </div>
     </div>

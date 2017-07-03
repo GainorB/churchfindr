@@ -4,13 +4,13 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find A Church</a></li>
-            <li role="presentation" class="active"><a href="/users">My Profile</a></li>
-            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <li role="presentation"><a href="/">Find Churches</a></li>
+            <li role="presentation" class="active"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation"><a href="/">Home</a></li>
             <li role="presentation" class="active"><a href="/auth/register">Register</a></li>
-            <li role="presentation"><a href="/auth/login">Log In</a></li>
+            <li role="presentation"><a href="/auth/login">Login</a></li>
             <% } %>
           </ul>
         </nav>
@@ -20,6 +20,7 @@
       <div id="inside">
         <div id="center">
 <h1 class="page-header">Account Registration</h1>
+<p><%- messages('message', locals) %></p>
 <ul>
     <% if(errors){ %>
         <p>There are errors on the page, please fix to continue:</p>
@@ -33,54 +34,54 @@
 <form method='POST' action='/auth/register'>
     <div class="form-group">
         <label class="sr-only">Username</label>
-            <input type="text" id="register_username" class="form-control" name="username" title="Username" placeholder="Username">
+            <input type="text" class="form-control" name="username" title="Username" placeholder="Username">
         </div>
     <div class="form-group">
         <label class="sr-only">First Name</label>
-    <input type="text" id="register_firstname" class="form-control" name="firstname" title="First Name" placeholder="First Name">
+    <input type="text" class="form-control" name="firstname" title="First Name" placeholder="First Name">
         </div>
     <div class="form-group">
         <label class="sr-only">Last Name</label>
-    <input type="text" id="register_lastname" class="form-control" name="lastname" title="Last Name" placeholder="Last Name">
+    <input type="text" class="form-control" name="lastname" title="Last Name" placeholder="Last Name">
         </div>
     <div class="form-group">
         <label class="sr-only">Email</label>
-    <input type="email" id="register_email" class="form-control" name="email" title="Email" placeholder="E Mail">
+    <input type="email" class="form-control" name="email" title="Email" placeholder="E Mail">
         </div>
     <div class="form-group">
         <label class="sr-only">Password</label>
-    <input type="password" id="register_password" class="form-control" name="password" title="Password" placeholder="Password">
+    <input type="password" class="form-control" name="password" title="Password" placeholder="Password">
         </div>
     <div class="form-group">
         <label class="sr-only">Confirm Password</label>
-    <input type="password" id="register_password" class="form-control" name="password2" title="Confirm Password" placeholder="Confirm Password">
+    <input type="password" class="form-control" name="password2" title="Confirm Password" placeholder="Confirm Password">
         </div>
     <div class="form-group">
         <label class="sr-only">Phone Number</label>
-    <input type="text" id="register_phonenumber" class="form-control" name="phonenumber" title="Phone Number" placeholder="Phone Number (no symbols)">
+    <input type="text" class="form-control" name="phonenumber" title="Phone Number" placeholder="Phone Number (no symbols)">
         </div>
     <div class="form-group">
         <label class="sr-only">Street</label>
-    <input type="text" id="register_street" class="form-control" name="street" title="Street" placeholder="Street">
+    <input type="text" class="form-control" name="street" title="Street" placeholder="Street">
         </div>
     <div class="form-group">
         <label class="sr-only">City</label>
-    <input type="text" id="register_city" class="form-control" name="city" title="City" placeholder="City">
+    <input type="text" class="form-control" name="city" title="City" placeholder="City">
         </div>
     <div class="form-group">
         <label class="sr-only">State</label>
-    <input type="text" id="register_state" class="form-control" name="state" title="State" placeholder="State">
+    <input type="text" class="form-control" name="state" title="State" placeholder="State">
         </div>
     <div class="form-group">
         <label class="sr-only">Zip</label>
-    <input type="text" id="register_zip" class="form-control" name="zipcode" title="Zip Code" placeholder="Zip Code">
+    <input type="text" class="form-control" name="zipcode" title="Zip Code" placeholder="Zip Code">
         </div>
     <div class="form-group">
         <label class="sr-only">Country</label>
-    <input type="text" id="register_country" class="form-control" name="country" title="Country" placeholder="Country">
+    <input type="text" class="form-control" name="country" title="Country" placeholder="Country">
         </div>
         <p>Already have an account? <a href="/auth/login">Log In</a></p>
-<input type="submit" value="REGISTER" id="register_submit"> <input type="reset" value="RESET" id="register_reset">
+<input type="submit" value="REGISTER"> <input type="reset" value="RESET">
 </form>
       </div>
     </div>

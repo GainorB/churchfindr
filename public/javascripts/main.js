@@ -1,4 +1,4 @@
-console.log("main.js is connected.");
+//console.log("main.js is connected.");
 
 // GRAB DOM ELEMENTS
 var deleteBTN = document.querySelectorAll('.delete');

@@ -31,6 +31,36 @@ footer {
 }
 
 /*
+FLASH MESSAGES
+*/
+.error {
+    padding: 5px;
+    width: 95%;
+    background-color: #ffdddd;
+    border-left: 6px solid #f44336;
+    margin: auto;
+    font-size: 17px;
+}
+
+.success {
+    padding: 5px;
+    width: 95%;
+    background-color: #ddffdd;
+    border-left: 6px solid #4CAF50;
+    margin: auto;
+    font-size: 17px;
+}
+
+.info {
+    padding: 5px;
+    width: 95%;
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+    margin: auto;
+    font-size: 17px;
+}
+
+/*
 * SEARCH BAR AND STUFF
 */
 
@@ -48,80 +78,21 @@ footer {
   color: #337ab7;
 }
 
-#church_submit {
-  width: 300px; height: 40px;
-  border: 0px;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: white;
-  color: #337ab7;
-  border: 2px solid #337ab7;
-  text-decoration: none;
-  margin-top: 2px;
+.id {
+  visibility: hidden;
 }
 
-#church_submit:hover {
-  background-color: #337ab7;
-  color: white;  
-}
 
 /*
-* LOGIN FORM
+* FORMS
 */
 
-#login_username,
-#login_password {
-  width: 400px;
-  height: 50px;
-  font-size: 20px;
-  padding: 10px 10px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 2px solid #ccc;
-  margin-bottom: 5px;
-  font-weight: lighter;
-  letter-spacing: 2px;
-}
-
-#login_submit,
-#login_reset {
-  width: 120px; height: 40px;
-  border: 0px;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: white;
-  color: #337ab7;
-  border: 2px solid #337ab7;
-  text-decoration: none;
-}
-
-#login_submit:hover {
-  background-color: #337ab7;
-  color: white;  
-}
-
-#login_reset:hover {
-  background-color: #337ab7;
-  color: white;  
-}
-
-/*
-* REGISTRATION FORM
-*/
-
-#register_username,
-#register_firstname,
-#register_lastname,
-#register_email,
-#register_password,
-#register_phonenumber,
-#register_street,
-#register_zip,
-#register_city,
-#register_state,
-#register_country {
+input[type=text], 
+input[type=password],
+input[type=number],
+input[type=url],
+input[type=email],
+textarea {
   width: 500px;
   height: 50px;
   font-size: 20px;
@@ -135,8 +106,21 @@ footer {
   color: #337ab7;
 }
 
-#register_submit,
-#register_reset {
+textarea {
+  width: 400px;
+  height: 230px;
+  text-align: center;
+  overflow: hidden;
+  resize: none;
+}
+
+.ce {
+  font-size: 17px;
+  margin-top: 5px;
+}
+
+input[type=submit], 
+input[type=reset] {
   width: 150px; height: 40px;
   border: 0px;
   font-size: 16px;
@@ -148,12 +132,8 @@ footer {
   text-decoration: none;
 }
 
-#register_submit:hover {
-  background-color: #337ab7;
-  color: white;  
-}
-
-#register_reset:hover {
+input[type=submit]:hover, 
+input[type=reset]:hover {
   background-color: #337ab7;
   color: white;  
 }
@@ -293,4 +273,32 @@ ERRORS ON REGISTER/LOGIN FORMS
 #map {
     width: 100%;
     height: 400px;
+}
+
+@media (max-width: 800px){
+
+    input[type=text], 
+    input[type=password],
+    input[type=number],
+    input[type=url],
+    input[type=email],
+    textarea {
+        width: 330px;
+        font-size: 17px;
+    }
+
+  input[type=submit], 
+  input[type=reset] {
+        width: 100px;
+        height: 30px;
+  }
+
+  #church_search { 
+        width: 330px;
+        font-size: 30px;
+  }
+
+  textarea {
+    height: 200px;
+  }
 }

@@ -4,13 +4,13 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation" class="active"><a href="/">Find A Church</a></li>
-            <li role="presentation"><a href="/users">My Profile</a></li>
-            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <li role="presentation" class="active"><a href="/">Find Churches</a></li>
+            <li role="presentation"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation" class="active"><a href="/">Home</a></li>
             <li role="presentation"><a href="/auth/register">Register</a></li>
-            <li role="presentation"><a href="/auth/login">Log In</a></li>
+            <li role="presentation"><a href="/auth/login">Login</a></li>
             <% } %>
           </ul>
         </nav>
@@ -21,12 +21,14 @@
       <!-- DISPLAY CHURCH SEARCH -->
       <div id="inside">
         <div id="center">
-          <h4>Hey <%= user.firstname %>, enter a zip code or city below to find churches nearby.</h4>
+        <p><%- messages('message', locals) %></p>
+          <h4>Hey <%= user.firstname %>, enter a zipcode, city, or address below to find churches.</h4><span class="id"><%= user.id %></span>
           
           <form method="POST">
               <label class="sr-only">Search</label>
-                <input type="text" id="church_search" title="Search" name="city" required>
-                <input type="submit" id="church_submit" name="submit" value="search">
+                <input type="text" id="church_search" title="Search" name="city" value="<%= user.zip %>" required>
+                <input type="submit" name="submit" value="search">
+                <input type="reset" name="reset" value="reset">
           </form>
 
         <!-- DISPLAY CHURCHES FROM DATABASE -->
@@ -48,7 +50,7 @@
       <% } %>
     <%- include('partials/footer') %>
     </div>
-<script src="/javascripts/main.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

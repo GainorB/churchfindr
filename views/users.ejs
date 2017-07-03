@@ -4,13 +4,13 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <% if(user) { %>
-            <li role="presentation"><a href="/">Find A Church</a></li>
-            <li role="presentation" class="active"><a href="/users">My Profile</a></li>
-            <li role="presentation"><a href="/auth/logout">Log Out</a></li>
+            <li role="presentation"><a href="/">Find Churches</a></li>
+            <li role="presentation" class="active"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/auth/register">Register</a></li>
-            <li role="presentation" class="active"><a href="/auth/login">Log In</a></li>
+            <li role="presentation" class="active"><a href="/auth/register">Register</a></li>
+            <li role="presentation"><a href="/auth/login">Login</a></li>
             <% } %>
           </ul>
         </nav>
@@ -19,30 +19,32 @@
       </div>
       <div id="inside">
         <div id="center">
+        <p><%- messages('message', locals) %></p>
 <h2 class="page-header">Welcome to your profile <%= user.username %>!</h2>
 <p>Below you will find a summary of your account information along with churches you saved to your profile.</p>
-<input type="text" id="register_firstname" name="firstname" placeholder="<%= user.firstname %>" readonly><br>
-<input type="text" id="register_lastname" name="lastname" placeholder="<%= user.lastname %>" readonly><br>
-<input type="email" id="register_email" name="email" placeholder="<%= user.email %>" readonly><br>
-<input type="email" id="register_phonenumber" name="phonenumber" placeholder="<%= user.phonenumber %>" readonly><br>
-<input type="text" id="register_street" name="street" placeholder="<%= user.street %>" readonly><br>
-<input type="text" id="register_city" name="city" placeholder="<%= user.city %>" readonly><br>
-<input type="text" id="register_state" name="state" placeholder="<%= user.state %>" readonly><br>
-<input type="text" id="register_zip" name="zipcode" placeholder="<%= user.zip %>" readonly><br>
-<input type="text" id="register_country" name="country" placeholder="<%= user.country %>" readonly><br>
+<textarea readonly rows="4" cols="70">
+<%= user.firstname %> <%= user.lastname %>&#013;&#013;
+<%= user.phonenumber %>&#013;&#013;
+<%= user.street %>&#013;<%= user.city %>, <%= user.state %> <%= user.zip %>&#013;<%= user.country %>
+</textarea>
 <br>
-<p>Save a church to your profile, to leave a review!</p>
-<p>Send a SMS to your phone with the churches information by <mark><u>double</u></mark> clicking <span class="smsText">"SEND A SMS".</span></p>
 <p>
-    <ul id="savedChurches">
-        <% data.forEach(function(d) { %>
-            <% if(d.name){ %>
-                <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><span class="hideme">|</span><br><small class="review_text"><% if(d.review){ %><em>"<%= d.review %>"</em><% } %></small><br><span class="sms" id="<%= d.id %>">SEND A SMS</span> <span class="review" id="<%= d.id %>">LEAVE A REVIEW</span> <span class="delete" id="<%= d.id %>">DELETE FROM PROFILE</span></li>
-            <% } %>
-        <% }) %>
-    </ul>
+<% if(data.length != 0) { %>
+    <% data.forEach(function(d) { %>
+        <h3>Saved Churches</h3>
+        
+        <ul id="savedChurches">
+            <li class="thisChurchIsSaved"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><p class="ce" id="<%= d.id %>" contenteditable="true">Type your review here, then double click your review to submit it.</p><% if(d.review){ %><small class="review_text"><em>"<%= d.review %>"</em></small><br><% } %><a href="/profile/sms/<%= d.id %>"><span class="sms">SEND SMS</span></a> <a href="/profile/delete/<%= d.id %>"><span class="delete">DELETE FROM PROFILE</span></a></li>
+        </ul>
+    <% }) %>
+
+<% } else { %>
+    <p>Save a church to your profile, to leave a review!</p>
+<% } %>
 </p>
       </div>
     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="/javascripts/saved.js"></script>
 <%- include('partials/footer') %>

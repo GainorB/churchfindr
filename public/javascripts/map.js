@@ -1,10 +1,10 @@
 'use strict'
-console.log('map.js is connected');
 
 const locations = [];
 let newObj = { lat: 0, lng: 0 };
+var id = document.querySelector('.id').innerHTML;
 
-axios.get("https://churchfindr.herokuapp.com/api/churches")
+axios.patch("https://churchfindr.herokuapp.com/api/churches", { id })
     .then((data) => {
         data.data.data.forEach((element) => {
             locations.push({lat: element.lat, lng: element.lng }) 

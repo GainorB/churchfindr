@@ -2,13 +2,13 @@
 <ul id="churches">
 <% data.forEach(function(d) { %>
     <% if(!d.profile) { %>
-    <li class="displayChurches"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><br><span class="save" id="<%= d.id %>">SAVE</span><span class="delete" id="<%= d.id %>">DELETE</span></li>
+    <li class="displayChurches"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><br><a href="/profile/save/<%= d.id %>"><span class="save">SAVE</span></a><a href="/profile/delete/<%= d.id %>"><span class="delete">DELETE</span></a></li>
     <% } %>
 <% }) %>
 </ul>
 Save churches to your profile, to review them and/or get more information.<br><br>
 <div id="map"></div>
 
+<script src="/javascripts/map.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAppwgf_zKgZd66IXWEQ6wllHT0n0zEMpA"></script>
-<script type="text/javascript" src="/javascripts/map.js"></script>

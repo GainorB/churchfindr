@@ -1,69 +1,19 @@
-console.log("saved.js is connected.");
+$( document ).ready(function() {
 
-// GRAB DOM ELEMENTS
-var deleteBTN = document.querySelectorAll('.delete');
-var reviewBTN = document.querySelectorAll('.review');
-var smsBTN = document.querySelectorAll('.sms');
+    var ce = document.querySelectorAll('.ce');
 
-// DELETE
-deleteBTN.forEach(function(element, index) {
-    element.addEventListener('click', function(){
+    $.each(ce, (index, element) => {
 
-    let id = element.getAttribute('id');
-    console.log('Delete Clicked '+id);
+        element.addEventListener('dblclick', e => {
 
-    element.parentNode.parentNode.removeChild(element.parentNode);
-    
-    // AXIOS DELETE ROUTE
-    axios.delete('https://churchfindr.herokuapp.com/'+id);
-    });
-});
+            let review = element.textContent;
+            let id = element.getAttribute('id');
+            element.innerHTML = "Thanks, review submitted."
 
-// REVIEW
-reviewBTN.forEach(function(element, index) {
-    element.addEventListener('click', function(){
-
-    let id = element.getAttribute('id');
-    console.log('Review Clicked '+id);
-    let parent = element.parentNode;
-
-    //CREATE INPUT
-    var input = document.createElement('input');
-    input.type = "text";
-    input.placeholder = "Type a review. Click Enter to save."
-    input.setAttribute('id', 'review_input');
-    parent.appendChild(input);
-
-        input.addEventListener('change', function(){
-            var grabReview = document.getElementById('review_input').value;
-            console.log("id: "+id + " review: " +grabReview);
-
-            // AXIOS PATCH ROUTE
-            axios.patch('https://churchfindr.herokuapp.com/reviews/'+id, {
-                review: grabReview,
-                id: id
-            });
+            axios.patch(`https://churchfindr.herokuapp.com/profile/review/${id}`, { id, review })
+                .catch(err => { console.error(err); });
         });
-    });
-});
 
-// SMS
-smsBTN.forEach(function(element, index) {
-    element.addEventListener('dblclick', function(){
+    })
 
-    let id = element.getAttribute('id');
-    console.log('SMS Clicked '+id);
-    let parent = element.parentNode;
-
-    // GRAB THE ADDRESS
-    let address = element.parentNode.textContent;
-    address = address.substring(0, address.indexOf('|'));
-
-    console.log(address);
-
-        // AXIOS PATCH ROUTE
-        axios.patch('https://churchfindr.herokuapp.com/sms', {
-            address: address
-        });
-    });
 });

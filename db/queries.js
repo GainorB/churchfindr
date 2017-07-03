@@ -6,14 +6,14 @@ const client = new twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
 // ADD PLACES TO DATABASE
 function newChurch(req, res, next){
     church.getChurch(req.body.city, (err, results) => {
-        if (err) {
+        if(err) {
             console.log(err);
         } else {
             //console.log(results);
             //console.log("User ID "+ parseInt(req.user.id));
-            return db.task(t=>t.batch(results.map(r=>t.none('INSERT INTO churches(name, address, lat, lng, searchprofile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
-                     .then(function(data){ res.redirect('/'); })
-                     .catch(function(err){ return next(err); });
+            return db.task(t => t.batch(results.map(r => t.none('INSERT INTO churches(name, address, lat, lng, searchprofile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
+                     .then(data => { res.redirect('/'); })
+                     .catch(err => { return next(err); });
         };
     });
 }
@@ -22,66 +22,63 @@ function newChurch(req, res, next){
 function getChurches(req, res, next){
 
     if(typeof (req.user) !== "undefined"){
+
         var userID = parseInt(req.user.id);
         
         db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
-        .then(function(data){
+        .then(data => {
             res.render('index', {data})
         })
-        .catch(function(err) {
+        .catch(err => {
             return next(err);
         });
+
     } else {
+
         db.any('SELECT * FROM churches')
-        .then(function(data){
+        .then(data => {
             res.render('index', {data})
         })
-        .catch(function(err) {
+        .catch(err => {
             return next(err);
         });
+
     }
 }
 
 // GET ALL CHURCHES API
 function getChurchesAPI(req, res, next){
 
-    if(typeof (req.user) !== "undefined"){
-        var userID = parseInt(req.user.id);
-        
-        db.any('SELECT name, address, lat, lng FROM churches where searchprofile = $1', userID)
-        .then(function(data){
-            res.status(200).json({data});
-        })
-        .catch(function(err) {
-            return next(err);
-        });
-    } else {
-        db.any('SELECT * FROM churches')
-        .then(function(data){
-            res.status(200).json({data});
-        })
-        .catch(function(err) {
-            return next(err);
-        });
-    }
+    var id = parseInt(req.body.id);
+    
+    db.any('SELECT name, address, lat, lng FROM churches where searchprofile = $1', id)
+    .then(data => {
+        res.status(200).json({data});
+    })
+    .catch(err => {
+        return next(err);
+    });
 }
 
 // DELETE A CHURCH
-function deleteChurch(req, res, next){
-    var churchID = parseInt(req.params.id);
+function deleteChurch(id, req, res, next){
+    var churchID = parseInt(id);
 
-    db.result('DELETE FROM churches where id = $1', churchID)
-        .catch(function(err) {
+    db.result('DELETE FROM churches where id = $1 AND searchprofile = $2', [churchID, req.user.id])
+        .then(data => {
+            req.flash('success', "Church deleted from your profile");
+            res.redirect('/');
+        })
+        .catch(err => {
             return next(err);
         });
 }
 
 // LEAVE A REVIEW
 function reviewChurch(req, res, next){
-    var churchID = parseInt(req.params.id);
 
-    db.none('UPDATE churches SET review = $1 WHERE id = $2', [req.body.review, churchID])
-        .catch(function(err) {
+    db.none('UPDATE churches SET review = $1 WHERE id = $2 AND profile = $3', [req.body.review, req.body.id, req.user.id])
+        .catch(err => {
             return next(err);
         });
 }
@@ -91,15 +88,16 @@ function reviewChurch(req, res, next){
 */
 
 // SAVE CHURCH TO PROFILE
-function saveChurchToProfile(req, res, next){
-    var churchID = parseInt(req.params.id);
+function saveChurchToProfile(id, req, res, next){
+    var churchID = parseInt(id);
     var userID = parseInt(req.user.id);
 
-    console.log("Who's logged in? " + req.user.username);
-    console.log("Get logged in ID number: " + userID);
-
     db.none('UPDATE churches SET profile = $1 WHERE id = $2', [userID, churchID])
-        .catch(function(err) {
+        .then(data => {
+            req.flash('success', "Church saved to your profile");
+            res.redirect('/');
+        })
+        .catch(err => {
             return next(err);
         });
 }
@@ -109,26 +107,36 @@ function getSavedChurchesFromProfile(req, res, next){
     var userID = parseInt(req.user.id);
 
         db.any('SELECT churches.id, churches.name, churches.address, churches.review FROM churches JOIN users ON churches.profile = users.id WHERE users.id = $1', userID)
-        .then(function(data){
+        .then(data => {
             res.render('users', { data: data })
         })
-        .catch(function(err) {
+        .catch(err => {
             return next(err);
         });
 }
 
 // SEND SMS
-function sendSMS(req, res, next){
-    var number = parseInt(req.user.phonenumber);
-    console.log(number);
-    var address = req.body.address;
-    console.log(address);
+function sendSMS(id, req, res, next){
 
-    client.messages.create({
-    body: `Thanks for using Good News, the address you requested: ${address}.`,
-    to: `${number}`,  // Text this number
-    from: `${process.env.TWILIO_PHONENUMBER}` // From a valid Twilio number
-        }).then((message) => console.log(message.sid));
+    db.any('SELECT name, address FROM churches WHERE id = $1', id)
+        .then(data => {
+
+            let churchName = data[0].name;
+            let address = data[0].address;
+
+            req.flash('info', `Check your phone, text message with ${churchName} and ${address} sent to ${req.user.phonenumber}`);
+            res.redirect('/users');
+
+            client.messages.create({
+            body: `Thanks for using Good News, the address you requested: ${churchName} @ ${address}.`,
+            to: `${req.user.phonenumber}`,  // Text this number
+            from: `${process.env.TWILIO_PHONENUMBER}` // From a valid Twilio number
+                }).then(message => console.log(message.sid));
+
+        })
+        .catch(err => {
+            return next(err);
+        });
 }
 
 // EXPORT MODULES TO BE USED IN ROUTING
