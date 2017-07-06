@@ -6,6 +6,7 @@
             <% if(user) { %>
             <li role="presentation"><a href="/">Find churches</a></li>
             <li role="presentation" class="active"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/reviews">Reviews</a></li>
             <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation"><a href="/">Home</a></li>
@@ -22,11 +23,7 @@
         <p><%- messages('message', locals) %></p>
 <h2>Welcome to your profile <%= user.username %>!</h2>
 <p>Below you will find a summary of your account information along with churches you saved to your profile.</p>
-<textarea readonly rows="4" cols="70">
-<%= user.firstname %> <%= user.lastname %>&#013;&#013;
-<%= user.phonenumber %>&#013;&#013;
-<%= user.street %>&#013;<%= user.city %>, <%= user.state %> <%= user.zip %>&#013;<%= user.country %>
-</textarea>
+<p class="info">Text messages with churches information will be sent to <strong><%= user.phonenumber %></strong></p>
 <br>
 <p>
 <% if(data.length != 0) { %>

@@ -6,25 +6,21 @@ CREATE DATABASE church_app;
 CREATE TABLE IF NOT EXISTS users(
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
-    firstname VARCHAR(255),
-    lastname VARCHAR(255),
-    password VARCHAR(255),
-    email VARCHAR(255) UNIQUE NOT NULL,
-    phonenumber BIGINT,
-    street VARCHAR(255),
-    city VARCHAR(255),
-    state VARCHAR(255),
-    country VARCHAR(255),
-    zip INTEGER
+    password VARCHAR(255) NOT NULL,
+    phonenumber BIGINT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS churches(
     id SERIAL PRIMARY KEY,
-    name TEXT,
-    address TEXT,
-    lat FLOAT8,
-    lng FLOAT8,
+    visible BOOLEAN NOT NULL DEFAULT TRUE,
+    name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    lat FLOAT8 NOT NULL,
+    lng FLOAT8 NOT NULL,
     review TEXT,
-    profile INTEGER,
-    searchprofile INTEGER
+    review_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    saved_profile INTEGER,
+    search_profile INTEGER NOT NULL,
+    FOREIGN KEY (saved_profile) REFERENCES users(id),
+    FOREIGN KEY (search_profile) REFERENCES users(id)
 );

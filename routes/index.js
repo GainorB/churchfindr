@@ -18,6 +18,15 @@ router.get('/profile/delete/:id', authHelpers.loginRequired, (req, res, next) =>
     db.deleteChurch(id, req, res, next);
 });
 
+// REVIEWS ROUTE
+router.get('/reviews', authHelpers.loginRequired, db.getReviews);
+
+// SAVE A REVIEWED CHURCH TO PROFILE
+router.get('/profile/reviews/save/:id', authHelpers.loginRequired, (req, res, next) => {
+    let id = req.params.id;
+    db.saveReviewedChurchToProfile(id, req, res, next);
+});
+
 /*
 * REVIEW CHURCHES
 */

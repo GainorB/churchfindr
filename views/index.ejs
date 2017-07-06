@@ -6,6 +6,7 @@
             <% if(user) { %>
             <li role="presentation" class="active"><a href="/">Find churches</a></li>
             <li role="presentation"><a href="/users">Profile</a></li>
+            <li role="presentation"><a href="/reviews">Reviews</a></li>
             <li role="presentation"><a href="/auth/logout">Logout</a></li>
             <% } else { %>
             <li role="presentation" class="active"><a href="/">Home</a></li>
@@ -26,7 +27,7 @@
           
           <form method="POST">
               <label class="sr-only">Search</label>
-                <input type="text" id="church_search" title="Search" name="city" value="<%= user.zip %>" required><br>
+                <input type="text" id="church_search" title="Search" name="city" required><br>
                 <input type="submit" name="submit" value="search">
                 <input type="reset" name="reset" value="reset">
           </form>

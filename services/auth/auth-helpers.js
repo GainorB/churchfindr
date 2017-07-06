@@ -16,16 +16,8 @@ function createNewUser(req, res) {
   const hash = bcrypt.hashSync(req.body.password, salt);
   return User.create({
     username: req.body.username,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
     password: hash,
-    email: req.body.email,
-    phonenumber: req.body.phonenumber,
-    street: req.body.street,
-    city: req.body.city,
-    state: req.body.state,
-    country: req.body.country,
-    zip: req.body.zipcode
+    phonenumber: req.body.phonenumber
   });
 }
 

@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <% if(user) { %>
+            <li role="presentation"><a href="/">Find churches</a></li>
+            <li role="presentation"><a href="/users">Profile</a></li>
+            <li role="presentation" class="active"><a href="/reviews">Reviews</a></li>
+            <li role="presentation"><a href="/auth/logout">Logout</a></li>
+            <% } else { %>
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation" class="active"><a href="/auth/register">Register</a></li>
+            <li role="presentation"><a href="/auth/login">Login</a></li>
+            <% } %>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Good News</h3>
+        <small id="slogan" class="text-muted">The gospel of good news is a person: Jesus of Nazareth.</small>
+      </div>
+      <div id="inside">
+        <div id="center">
+        <p><%- messages('message', locals) %></p>
+        <h3>Shared Experiences</h3>
+<br>
+<p>
+<% if(review_stats != 0) { %>
+    <% reviews.forEach(function(d) { %>
+        
+<p class="reviewedP">
+<span class="reviewed">"<%= d.review %>"</span><br>
+<span class="reviewedText">Reviewed by <%= d.username %> attending <%= d.name %> on <%= d.review_date %></span>
+<br>
+<% if(d.saved_profile != user.id) { %>
+    <a href="/profile/reviews/save/<%= d.id %>"><span class="save">SAVE THIS CHURCH TO MY PROFILE</span></a>
+<% } %>
+</p>
+    <% }) %>
+
+<% } else { %>
+    <p>There aren't any churches with reviews. Find a church, save it to your profile then leave a review!</p>
+<% } %>
+</p>
+      </div>
+    </div>
+
+<%- include('partials/footer') %>

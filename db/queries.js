@@ -10,7 +10,7 @@ function newChurch(req, res, next){
             console.log(err);
         } else {
 
-            return db.task(t => t.batch(results.map(r => t.none('INSERT INTO churches(name, address, lat, lng, searchprofile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
+            return db.task(t => t.batch(results.map(r => t.none('INSERT INTO churches(name, address, lat, lng, search_profile)' + 'values($1, $2, $3, $4, $5)', [r.name, r.address, r.lat, r.lng, parseInt(req.user.id)]))))
                      .then(data => { res.redirect('/'); })
                      .catch(err => { return next(err); });
         };
@@ -24,7 +24,7 @@ function getChurches(req, res, next){
 
         var userID = parseInt(req.user.id);
         
-        db.any('SELECT * FROM churches WHERE searchprofile = $1', userID)
+        db.any(`SELECT * FROM churches WHERE visible = TRUE AND search_profile = $1 ORDER BY name ASC`, userID)
         .then(data => {
             res.render('index', {data})
         })
@@ -34,7 +34,7 @@ function getChurches(req, res, next){
 
     } else {
 
-        db.any('SELECT * FROM churches')
+        db.any(`SELECT * FROM churches WHERE visible = TRUE ORDER BY name ASC`)
         .then(data => {
             res.render('index', {data})
         })
@@ -50,7 +50,7 @@ function getChurchesAPI(req, res, next){
 
     var id = parseInt(req.body.id);
     
-    db.any('SELECT name, address, lat, lng FROM churches where searchprofile = $1', id)
+    db.any(`SELECT name, address, lat, lng FROM churches WHERE visible = TRUE AND search_profile = $1 ORDER BY name ASC`, id)
     .then(data => {
         res.status(200).json({data});
     })
@@ -63,7 +63,7 @@ function getChurchesAPI(req, res, next){
 function deleteChurch(id, req, res, next){
     var churchID = parseInt(id);
 
-    db.result('DELETE FROM churches where id = $1 AND searchprofile = $2', [churchID, req.user.id])
+    db.result('DELETE FROM churches where id = $1 AND search_profile = $2', [churchID, req.user.id])
         .then(data => {
             req.flash('success', "Church deleted from your profile");
             res.redirect('/');
@@ -76,10 +76,38 @@ function deleteChurch(id, req, res, next){
 // LEAVE A REVIEW
 function reviewChurch(req, res, next){
 
-    db.none('UPDATE churches SET review = $1 WHERE id = $2 AND profile = $3', [req.body.review, req.body.id, req.user.id])
+    db.none('UPDATE churches SET review = $1, review_date = now() WHERE id = $2 AND search_profile = $3', [req.body.review, req.body.id, req.user.id])
         .catch(err => {
             return next(err);
         });
+}
+
+// GET REVIEWS
+function getReviews(req, res, next){
+    db.tx(t => {
+
+            return t.batch([
+                // TOTAL REVIEWS IN DATABASE
+                t.any(`SELECT COUNT(*) AS review_stats FROM churches WHERE review != 'null'`),
+                // GET ALL CHURCHES WITH REVIEWS
+                t.any(`SELECT users.username, COALESCE(to_char(review_date, 'Dy Mon DD'), '') AS review_date, churches.id, churches.saved_profile, churches.name, churches.address, churches.review FROM churches
+                       INNER JOIN users on churches.saved_profile = users.id
+                       WHERE churches.review != 'null' ORDER BY churches.name ASC`)
+            ]);
+        })
+        .then(data => {
+
+            let review_stats = data[0][0].review_stats;
+            let reviews = data[1].map(element => {
+                return element;
+            });
+
+            res.render('reviews', { review_stats, reviews });
+
+        })
+        .catch(err => {
+            console.error(err);
+        })
 }
 
 /*
@@ -91,27 +119,104 @@ function saveChurchToProfile(id, req, res, next){
     var churchID = parseInt(id);
     var userID = parseInt(req.user.id);
 
-    db.none('UPDATE churches SET profile = $1 WHERE id = $2', [userID, churchID])
+    db.any(`SELECT name FROM churches WHERE id = $1`, churchID)
         .then(data => {
-            req.flash('success', "Church saved to your profile");
-            res.redirect('/');
+
+            let name = data[0].name;
+
+            db.any(`SELECT name FROM churches WHERE saved_profile = $1`, userID)
+                .then(data => {
+
+                    let names = data.map(element => {
+                        return element.name;
+                    })
+
+                    if(names.includes(name)){
+                        req.flash('error', "You can't save a church you already saved");
+                        res.redirect('/');
+                    } else {
+
+                        db.none(`UPDATE churches SET visible = FALSE, saved_profile = $1 WHERE id = $2`, [userID, churchID])
+                            .then(data => {
+                                req.flash('success', "Church saved to your profile");
+                                res.redirect('/');
+                            })
+                            .catch(err => {
+                                return next(err);
+                            });
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
         })
         .catch(err => {
-            return next(err);
-        });
+            console.error(err);
+        })
 }
 
 //GET CHURCHES SAVED TO PROFILE
 function getSavedChurchesFromProfile(req, res, next){
     var userID = parseInt(req.user.id);
 
-        db.any('SELECT churches.id, churches.name, churches.address, churches.review FROM churches JOIN users ON churches.profile = users.id WHERE users.id = $1', userID)
+        db.any(`SELECT churches.id, churches.name, churches.address, churches.review FROM churches
+                INNER JOIN users ON churches.saved_profile = users.id
+                WHERE visible = FALSE AND users.id = $1 ORDER BY name ASC`, userID)
         .then(data => {
-            res.render('users', { data: data })
+            res.render('users', { data });
         })
         .catch(err => {
             return next(err);
         });
+}
+
+function saveReviewedChurchToProfile(id, req, res, next){
+    var churchID = parseInt(id);
+    var userID = parseInt(req.user.id);
+
+    db.any(`SELECT name FROM churches WHERE id = $1`, churchID)
+        .then(data => {
+
+            let name = data[0].name;
+
+            db.any(`SELECT name FROM churches WHERE saved_profile = $1`, userID)
+                .then(data => {
+
+                    let names = data.map(element => {
+                        return element.name;
+                    })
+
+                    if(names.includes(name)){
+                        req.flash('error', "You can't save a church you already saved");
+                        res.redirect('/reviews');
+                    } else {
+
+                    db.any('SELECT id, name, address, lat, lng FROM churches WHERE id = $1', churchID)
+                        .then(data => {
+
+                            db.any(`INSERT into churches(name, visible, address, lat, lng, saved_profile, search_profile)` 
+                                    + `VALUES($1, $2, $3, $4, $5, $6, $7)`, [data[0].name, false, data[0].address, data[0].lat, data[0].lng, userID, userID])
+                                .then(data => {
+                                    req.flash('success', "Church saved to your profile");
+                                    res.redirect('/users');
+                                })
+                                .catch(err => {
+                                    return next(err);
+                                });
+
+                        })
+                        .catch(err => {
+                            return next(err);
+                        });
+                    }
+                })
+                .catch(err => {
+                    return next(err);
+                })
+        })
+        .catch(err => {
+            return next(err);
+        })
 }
 
 // SEND SMS
@@ -148,4 +253,6 @@ module.exports = {
     getSavedChurchesFromProfile, // READ
     sendSMS,
     getChurchesAPI,
+    getReviews,
+    saveReviewedChurchToProfile
 };
