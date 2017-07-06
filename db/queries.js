@@ -21,26 +21,48 @@ function newChurch(req, res, next){
 function getChurches(req, res, next){
 
     if(typeof (req.user) !== "undefined"){
-
-        var userID = parseInt(req.user.id);
         
-        db.any(`SELECT * FROM churches WHERE visible = TRUE AND search_profile = $1 ORDER BY name ASC`, userID)
-        .then(data => {
-            res.render('index', {data})
-        })
-        .catch(err => {
-            return next(err);
-        });
+        db.tx(t => {
+
+                return t.batch([
+                    // TOTAL SEARCH RESULTS 
+                    t.any(`SELECT COUNT(*) AS search_stats FROM churches WHERE visible = TRUE AND search_profile = $1`, req.user.id),
+                    // GET ALL CHURCHES
+                    t.any(`SELECT * FROM churches WHERE visible = TRUE AND search_profile = $1`, req.user.id)
+                ]);
+            })
+            .then(data => {
+
+                let churches = data[1].map(element => { return element; });
+                let search_stats = data[0][0].search_stats;
+                
+                res.render('index', { churches, search_stats });
+            })
+            .catch(err => {
+                return next(err);
+            });
 
     } else {
 
-        db.any(`SELECT * FROM churches WHERE visible = TRUE ORDER BY name ASC`)
-        .then(data => {
-            res.render('index', {data})
-        })
-        .catch(err => {
-            return next(err);
-        });
+        db.tx(t => {
+
+                return t.batch([
+                    // TOTAL SEARCH RESULTS 
+                    t.any(`SELECT COUNT(*) AS search_stats FROM churches WHERE visible = TRUE`),
+                    // GET ALL CHURCHES
+                    t.any(`SELECT * FROM churches WHERE visible = TRUE`)
+                ]);
+            })
+            .then(data => {
+
+                let churches = data[1].map(element => { return element; });
+                let search_stats = data[0][0].search_stats;
+                
+                res.render('index', { churches, search_stats });
+            })
+            .catch(err => {
+                return next(err);
+            });
 
     }
 }
@@ -66,6 +88,19 @@ function deleteChurch(id, req, res, next){
     db.result('DELETE FROM churches where id = $1 AND search_profile = $2', [churchID, req.user.id])
         .then(data => {
             req.flash('success', "Church deleted from your profile");
+            res.redirect('/');
+        })
+        .catch(err => {
+            return next(err);
+        });
+}
+
+// DELETE ALL CHURCHES
+function deleteAllChurches(req, res, next){
+
+    db.result('DELETE FROM churches where search_profile = $2', req.user.id)
+        .then(data => {
+            req.flash('success', "All churches deleted from your profile");
             res.redirect('/');
         })
         .catch(err => {

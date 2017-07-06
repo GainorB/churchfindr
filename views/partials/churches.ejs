@@ -1,7 +1,8 @@
 <br>
 <h3>Recent Church Searches</h3>
+<em>Currently showing <%= search_stats %> results.</em><br><br>
 <ul id="churches">
-<% data.forEach(function(d) { %>
+<% churches.forEach(function(d) { %>
     <% if(!d.profile) { %>
     <li class="displayChurches"><span class="churchName"><strong><%= d.name %></strong></span><br><span class="churchAddress"><%= d.address %></span><br><a href="/profile/save/<%= d.id %>"><span class="save">SAVE</span></a><a href="/profile/delete/<%= d.id %>"><span class="delete">DELETE</span></a></li>
     <% } %>
